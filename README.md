@@ -5,5 +5,5 @@
 * Василовская Дарья  - https://github.com/vicadlsn
 * Лысенко Василий  -  https://github.com/KarumaRey
 * Сарварова Мария - https://github.com/cupotato
-* Ярослав Жовтяк - https://github.com/Dibydo
+* Жовтяк Ярослав - https://github.com/Dibydo
 
