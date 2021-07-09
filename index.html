@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>WizArt</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <!-- Форма для создания нового изображения -->
+    <div class='form imageCreationForm'>
+        <form autocomplete='on'> 
+            <div class='formTitle'><b>Новое Изображение</b></div>
+            <div class='input'>
+                <label>Ширина, пикс.</label>
+                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+            </div>
+            <div class='input'>
+                <label>Высота, пикс.</label>
+                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+            </div>
+            <div class='input'>
+               <label>Цвет фона</label>
+               <input type='color' name='canvasColor' value='#ffffff'>
+            </div>
+            <div class='input'>
+               <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
+            </div>
+            <div class='button' style="float:left">
+                <button type='button'>Отмена</button>
+            </div>
+            <div class='buttonOk'>
+                <button type='button'>Создать</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Форма для изменения размера изображения -->
+    <div class='form resizeForm disabled'>
+        <form autocomplete='on'> 
+            <div class='formTitle'><b>Изменить Размер Изображения</b></div>
+            <div class='input'>
+                <label>Ширина, пикс.</label>
+                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+            </div>
+            <div class='input'>
+                <label>Высота, пикс.</label>
+                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+            </div>
+            <div class='button' style="float:left">
+                <button type='button'>Отмена</button>
+            </div>
+            <div class='buttonOk'>
+                <button type='button'>Ок</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Форма для изменения размера полотна -->
+    <div class='form resizeForm disabled'>
+        <form autocomplete='on'> 
+            <div class='formTitle'><b>Изменить Размер Полотна</b></div>
+            <div class='input'>
+                <label>Ширина, пикс.</label>
+                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+            </div>
+            <div class='input'>
+                <label>Высота, пикс.</label>
+                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+            </div>
+            <div class='button' style="float:left">
+                <button type='button'>Отмена</button>
+            </div>
+            <div class='buttonOk'>
+                <button type='button'>Ок</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
