@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: sans-serif;
+    background: #E0E0E0;
+}
+
+
+.form {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    width: 200px;
+    background: #F5F5F5;
+    border-radius: 10px;
+    padding: 30px;
+    margin: -175px 0px 0px -100px;  
+    box-shadow: 0 0 16px rgba(0,0,0,0.1);
+}
+
+.disabled {
+    display: none;
+}
+
+.imageCreationForm form{
+    height: 350px;
+}
+
+.resizeForm form{
+    height: 260px;
+}
+
+.formTitle {
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.form .input {
+    /* Блок с вводом данных */ 
+    position: relative;
+    margin-bottom: 20px;
+}
+
+
+.form .input input[type='number'] {
+    /* Поле ввода чисел */
+    height: 100%;
+    width: 97%;
+    font-size: 14px;
+    margin-top: 5px;
+    padding: 8px 0px 8px 5px;
+    /*border: none;
+    border-bottom: 1px solid silver;*/
+    outline: none;
+    border-radius: 8px;
+    border: 1px solid silver;
+    transition: 0.2s;
+} 
+
+
+.form .input input[type='color'] {
+    /* Палитра */
+    width: 100%;
+    margin-top: 5px;
+    padding: 6px 0px 6px 0px;
+    border-radius: 8px;
+    border: 1px solid silver;
+    background: #fff;
+    transition: 0.2s;
+}
+
+.form .input input:focus {
+    border: 1px solid #FFB300;
+} 
+
+.form .input input[type='number']:valid {
+    background: #fff;
+}
+
+.form .input input[type='number']:invalid {
+    background: #FFCDD2;
+    border: 1px solid #E57373
+}
+
+.form button {
+    padding: 10px, 20px;
+    width: 90px;
+    height: 34px;
+    //border: none;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: 1px solid silver;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s;
+    background: #fff;
+}
+
+.form .button button:focus, 
+.form .button button:hover {
+    background: #E0E0E0;
+}
+.form .buttonOk button {
+    color: #fff;
+    border: none;
+    background: #FFB300;
+}
+
+.form .buttonOk button:focus, 
+.form .buttonOk button:hover {
+    background: #FFCA28;
+}
+
+.form .disabledButton {
+    background: #FFCA28;
+}
+
