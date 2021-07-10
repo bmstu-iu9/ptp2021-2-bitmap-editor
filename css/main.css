@@ -1,3 +1,8 @@
+html,
+body {
+    overflow: auto;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -5,7 +10,6 @@ body {
     font-family: sans-serif;
     background: #E0E0E0;
 }
-
 
 .form {
     position: absolute;
@@ -16,19 +20,19 @@ body {
     background: #F5F5F5;
     border-radius: 10px;
     padding: 30px;
-    margin: -175px 0px 0px -100px;  
-    box-shadow: 0 0 16px rgba(0,0,0,0.1);
+    margin: -175px 0px 0px -100px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
 .disabled {
     display: none;
 }
 
-.imageCreationForm form{
+.imageCreationForm form {
     height: 350px;
 }
 
-.resizeForm form{
+.resizeForm form {
     height: 260px;
 }
 
@@ -39,7 +43,7 @@ body {
 }
 
 .form .input {
-    /* Блок с вводом данных */ 
+    /* Блок с вводом данных */
     position: relative;
     margin-bottom: 20px;
 }
@@ -58,7 +62,7 @@ body {
     border-radius: 8px;
     border: 1px solid silver;
     transition: 0.2s;
-} 
+}
 
 
 .form .input input[type='color'] {
@@ -74,7 +78,7 @@ body {
 
 .form .input input:focus {
     border: 1px solid #FFB300;
-} 
+}
 
 .form .input input[type='number']:valid {
     background: #fff;
@@ -100,17 +104,18 @@ body {
     background: #fff;
 }
 
-.form .button button:focus, 
+.form .button button:focus,
 .form .button button:hover {
     background: #E0E0E0;
 }
+
 .form .buttonOk button {
     color: #fff;
     border: none;
     background: #FFB300;
 }
 
-.form .buttonOk button:focus, 
+.form .buttonOk button:focus,
 .form .buttonOk button:hover {
     background: #FFCA28;
 }
@@ -118,4 +123,87 @@ body {
 .form .disabledButton {
     background: #FFCA28;
 }
+
+.workspace {
+    display: block;
+    position: absolute;
+    overflow: auto;
+    top: 44px;
+    left: 60px;
+    bottom: 44px;
+    right: 160px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+.menuBar {
+    position: absolute;
+    margin: 0px;
+    padding-left: 120px;
+    height: 44px;
+    overflow: hidden;
+}
+
+
+.menu {
+    position: relative;
+    width: 150px;
+    display: inline-block;
+    margin-right: -4px;
+}
+
+.menuTitle {
+    position: relative;
+    padding: 13px 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.menuTitle:hover {
+    background: #F5F5F5;
+}
+
+.menuList {
+    position: absolute;
+    width: 150px;
+    padding: 1px 0px;
+    background: #fff;
+    border-radius: 0px 0px 8px 8px;
+}
+
+.menu .menuList {
+    display: none;
+}
+
+.menu.active {
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+.menu.active .menuList {
+    display: block;
+}
+
+.menu.active .menuTitle {
+    background: #fff;
+    display: block;
+}
+
+.menuItem {
+    margin: 8px 0px;
+    padding: 8px 24px;
+    cursor: pointer;
+}
+
+.menuItem:hover,
+.menuItem:focus {
+    background: #FFB300;
+}
+
+
+
+
+
+
 

@@ -1,15 +1,57 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WizArt</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
+    <div class='workspace'></div>
+
+   <!-- Меню -->
+    <div class='menuBar'>
+        <div class='menu'>
+            <div class='menuTitle'>Файл</div>
+            <div class='menuList'>
+                <div class='menuItem' id='createImage'>Создать</div>
+                <div class='menuItem' id='openImage'>Открыть</div>
+                <div class='menuItem' id='saveImage'>Сохранить</div>
+            </div>
+        </div>
+        <div class='menu'>
+            <div class='menuTitle'>Правка</div>
+            <div class='menuList'>
+                <div class='menuItem' id='createImage'>Отменить</div>
+                <div class='menuItem' id='openImage'>Вернуть</div>
+                <div class='menuItem' id='saveImage'>Вырезать</div>
+                <div class='menuItem' id='saveImage'>Скопировать</div>
+                <div class='menuItem' id='saveImage'>Вставить</div>
+                <div class='menuItem' id='saveImage'>Удалить</div>
+            </div>
+        </div>
+        <div class='menu'>
+            <div class='menuTitle'>Изображение</div>
+            <div class='menuList'>
+                <div class='menuItem' id='createImage'>Размер изображения</div>
+                <div class='menuItem' id='openImage'>Размер полотна</div>
+            </div>
+        </div>
+        <div class='menu'>
+            <div class='menuTitle'>Вид</div>
+            <div class='menuList'>
+                <div class='menuItem' id='createImage'>Увеличить</div>
+                <div class='menuItem' id='openImage'>Уменьшить</div>
+                <div class='menuItem' id='openImage'>Исходный размер</div>
+            </div>
+        </div>
+    </div>
+    
     <!-- Форма для создания нового изображения -->
-    <div class='form imageCreationForm'>
-        <form autocomplete='on'> 
+    <div class='form imageCreationForm disabled'>
+        <form autocomplete='on'>
             <div class='formTitle'><b>Новое Изображение</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -20,11 +62,11 @@
                 <input type='number' name='height' min='0' value='500' placeholder='0' required>
             </div>
             <div class='input'>
-               <label>Цвет фона</label>
-               <input type='color' name='canvasColor' value='#ffffff'>
+                <label>Цвет фона</label>
+                <input type='color' name='canvasColor' value='#ffffff'>
             </div>
             <div class='input'>
-               <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
+                <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
             </div>
             <div class='button' style="float:left">
                 <button type='button'>Отмена</button>
@@ -34,10 +76,10 @@
             </div>
         </form>
     </div>
-    
+
     <!-- Форма для изменения размера изображения -->
     <div class='form resizeForm disabled'>
-        <form autocomplete='on'> 
+        <form autocomplete='on'>
             <div class='formTitle'><b>Изменить Размер Изображения</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -55,10 +97,10 @@
             </div>
         </form>
     </div>
-    
+
     <!-- Форма для изменения размера полотна -->
     <div class='form resizeForm disabled'>
-        <form autocomplete='on'> 
+        <form autocomplete='on'>
             <div class='formTitle'><b>Изменить Размер Полотна</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -76,5 +118,7 @@
             </div>
         </form>
     </div>
+
 </body>
+
 </html>
