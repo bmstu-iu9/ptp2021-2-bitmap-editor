@@ -1,6 +1,6 @@
 html,
 body {
-    overflow: auto;
+    overflow: hidden;
 }
 
 body {
@@ -127,10 +127,10 @@ body {
 .workspace {
     display: block;
     position: absolute;
-    overflow: auto;
-    top: 44px;
+    overflow: hidden;
+    top: 40px;
     left: 60px;
-    bottom: 44px;
+    bottom: 60px;
     right: 160px;
     background-color: #F5F5F5;
     border-radius: 8px;
@@ -140,9 +140,8 @@ body {
 .menuBar {
     position: absolute;
     margin: 0px;
-    padding-left: 120px;
-    height: 44px;
-    overflow: hidden;
+    padding-left: 60px;
+    height: 40px;
 }
 
 
@@ -155,7 +154,7 @@ body {
 
 .menuTitle {
     position: relative;
-    padding: 13px 12px;
+    padding: 11px 12px;
     text-align: center;
     cursor: pointer;
 }
@@ -170,6 +169,7 @@ body {
     padding: 1px 0px;
     background: #fff;
     border-radius: 0px 0px 8px 8px;
+    padding: 8px 0px;
 }
 
 .menu .menuList {
@@ -191,19 +191,12 @@ body {
 }
 
 .menuItem {
-    margin: 8px 0px;
+    margin: 0px 0px;
     padding: 8px 24px;
     cursor: pointer;
 }
 
 .menuItem:hover,
 .menuItem:focus {
-    background: #FFB300;
+    background: #FFECB3;
 }
-
-
-
-
-
-
-

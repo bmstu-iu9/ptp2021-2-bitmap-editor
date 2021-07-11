@@ -11,7 +11,7 @@
 <body>
     <div class='workspace'></div>
 
-   <!-- Меню -->
+    <!-- Меню -->
     <div class='menuBar'>
         <div class='menu'>
             <div class='menuTitle'>Файл</div>
@@ -24,31 +24,31 @@
         <div class='menu'>
             <div class='menuTitle'>Правка</div>
             <div class='menuList'>
-                <div class='menuItem' id='createImage'>Отменить</div>
-                <div class='menuItem' id='openImage'>Вернуть</div>
-                <div class='menuItem' id='saveImage'>Вырезать</div>
-                <div class='menuItem' id='saveImage'>Скопировать</div>
-                <div class='menuItem' id='saveImage'>Вставить</div>
-                <div class='menuItem' id='saveImage'>Удалить</div>
+                <div class='menuItem' id='undo'>Отменить</div>
+                <div class='menuItem' id='redo'>Вернуть</div>
+                <div class='menuItem' id='cut'>Вырезать</div>
+                <div class='menuItem' id='copy'>Скопировать</div>
+                <div class='menuItem' id='paste'>Вставить</div>
+                <div class='menuItem' id='delete'>Удалить</div>
             </div>
         </div>
         <div class='menu'>
             <div class='menuTitle'>Изображение</div>
             <div class='menuList'>
-                <div class='menuItem' id='createImage'>Размер изображения</div>
-                <div class='menuItem' id='openImage'>Размер полотна</div>
+                <div class='menuItem' id='imageSize'>Размер изображения</div>
+                <div class='menuItem' id='canvasSize'>Размер полотна</div>
             </div>
         </div>
         <div class='menu'>
             <div class='menuTitle'>Вид</div>
             <div class='menuList'>
-                <div class='menuItem' id='createImage'>Увеличить</div>
-                <div class='menuItem' id='openImage'>Уменьшить</div>
-                <div class='menuItem' id='openImage'>Исходный размер</div>
+                <div class='menuItem' id='zoomIn'>Увеличить</div>
+                <div class='menuItem' id='zoomOut'>Уменьшить</div>
+                <div class='menuItem' id='originalSize'>Исходный размер</div>
             </div>
         </div>
     </div>
-    
+
     <!-- Форма для создания нового изображения -->
     <div class='form imageCreationForm disabled'>
         <form autocomplete='on'>
