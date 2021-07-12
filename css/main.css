@@ -124,18 +124,27 @@ body {
     background: #FFCA28;
 }
 
+/* Рабочая область */
+
 .workspace {
     display: block;
     position: absolute;
     overflow: hidden;
     top: 40px;
     left: 60px;
-    bottom: 60px;
-    right: 160px;
+    bottom: 40px;
+    right: 220px;
     background-color: #F5F5F5;
     border-radius: 8px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
+
+
+.topLeftCorner {
+    border-top-left-radius: 0px;
+}
+
+/* Меню */
 
 .menuBar {
     position: absolute;
@@ -156,7 +165,6 @@ body {
     position: relative;
     padding: 11px 12px;
     text-align: center;
-    cursor: pointer;
 }
 
 .menuTitle:hover {
@@ -193,7 +201,6 @@ body {
 .menuItem {
     margin: 0px 0px;
     padding: 8px 24px;
-    cursor: pointer;
 }
 
 .menuItem:hover,
@@ -201,6 +208,8 @@ body {
     background: #FFECB3;
 }
 
+
+/* Панель инструментов (слева) */
 .toolPanel {
     position: absolute;
     top: 40px;
@@ -212,7 +221,6 @@ body {
     position: relative;
     display: block;
     padding: 12px;
-    cursor: pointer;
 }
 
 .toolButton {
@@ -223,7 +231,6 @@ body {
     background-size: cover;
     background-color: #e0e0e0;
     outline: none;
-    cursor: pointer;
 }
 
 .toolPanel .button:hover,
@@ -236,6 +243,74 @@ body {
     background-color: #f5f5f5;
 }
 
-.topLeftCorner {
-    border-top-left-radius: 0px;
+/* Панель инструментов справа */
+
+.rightPanel {
+    position: absolute;
+    right: 0px;
+    width: 220px;
+    top: 40px;
+    bottom: 60px;
+    overflow: hidden;
+}
+
+.rightPanel .palette {
+    position: relative;
+    margin: 0px 12px 12px 12px;
+}
+
+.currentColors .colorPicker {
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    border-radius: 8px;
+}
+
+.currentColors .colorPicker:hover,
+.currentColors .colorPicker.active {
+    border-color: #FFB300;
+}
+
+.currentColors .colorPicker.active {
+    border-width: 2px;
+}
+
+.currentColors .button {
+    position: absolute;
+    display: inline-block;
+}
+
+.currentColors .button .toolButton {
+    display: block;
+    margin-bottom: 8px;
+    padding: 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.rightPanel .section {
+    position: relative;
+    box-sizing: content-box;
+    margin: 0px 12px 12px 12px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.rightPanel .preferences {
+    //height: 500px%;
+    padding: 16px;
+}
+
+/* Панель снизу */
+
+.bottomPanel {
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    right: 220px;
+    overflow: hidden;
+}
+
+.bottomPanel .zoom {
+    padding: 12px;
 }

@@ -48,8 +48,8 @@
             </div>
         </div>
     </div>
+    
 <!-- Панель инструментов (слева) -->
-
     <div class='toolPanel'>
         <div class='button'>
             <button type='button' name='moveTool' title='Выделить и переместить' class='toolButton' style='background-image: url(icons/left-panel-tools/move.svg)'></button>
@@ -85,6 +85,38 @@
             <button type='button' name='pipetteTool' title='Пипетка' class='toolButton' style='background-image: url(icons/left-panel-tools/pipette.svg)'></button>
         </div>
     </div>
+    
+    <!-- Панель инструментов (справа) -->
+    <div class='rightPanel'>
+      
+       <!-- Палитра -->
+        <div class='palette'>
+            <div class='currentColors'>
+                <input type='color' name='mainColor' value='#000000' title='Основной цвет' class='colorPicker active'>
+                <input type='color' name='additionalColor' value='#ffffff' title='Дополнительный цвет' class='colorPicker'>
+                <div class='button'>
+                    <button type='button' name='swapColors' title='Поменять цвета местами' class='toolButton' style='background-image: url(icons/right-panel-tools/swap.svg)'></button>
+                    <button type='button' name='blackWhite' title='Черный и белый' class='toolButton' style='background-image: url(icons/right-panel-tools/black-and-white.svg)'></button>
+                </div>
+                
+            </div>
+            <div class='savedColors'>
+            <!-- -->
+            </div>
+        </div>
+        
+        <!-- Свойства инструмента -->
+        <div class='section preferences'></div>
+    </div>
+       
+    <!-- Панель снизу -->
+    <div class='bottomPanel'>
+        <div class='zoom'>
+            <input type='range' name='zoom' min='0' max='500' value='100'>
+        </div>
+    </div>
+    
+    
     <!-- Форма для создания нового изображения -->
     <div class='form imageCreationForm disabled'>
         <form autocomplete='on'>
