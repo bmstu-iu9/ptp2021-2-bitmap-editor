@@ -1,15 +1,125 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>WizArt</title>
     <link rel="stylesheet" href="css/main.css">
 </head>
+
 <body>
+    <div class='workspace'></div>
+
+    <!-- Меню -->
+    <div class='menuBar'>
+        <div class='menu'>
+            <div class='menuTitle'>Файл</div>
+            <div class='menuList'>
+                <div class='menuItem' id='createImage'>Создать</div>
+                <div class='menuItem' id='openImage'>Открыть</div>
+                <div class='menuItem' id='saveImage'>Сохранить</div>
+            </div>
+        </div>
+        <div class='menu'>
+            <div class='menuTitle'>Правка</div>
+            <div class='menuList'>
+                <div class='menuItem' id='undo'>Отменить</div>
+                <div class='menuItem' id='redo'>Вернуть</div>
+                <div class='menuItem' id='cut'>Вырезать</div>
+                <div class='menuItem' id='copy'>Скопировать</div>
+                <div class='menuItem' id='paste'>Вставить</div>
+                <div class='menuItem' id='delete'>Удалить</div>
+            </div>
+        </div>
+        <div class='menu'>
+            <div class='menuTitle'>Изображение</div>
+            <div class='menuList'>
+                <div class='menuItem' id='imageSize'>Размер изображения</div>
+                <div class='menuItem' id='canvasSize'>Размер полотна</div>
+            </div>
+        </div>
+        <div class='menu'>
+            <div class='menuTitle'>Вид</div>
+            <div class='menuList'>
+                <div class='menuItem' id='zoomIn'>Увеличить</div>
+                <div class='menuItem' id='zoomOut'>Уменьшить</div>
+                <div class='menuItem' id='originalSize'>Исходный размер</div>
+            </div>
+        </div>
+    </div>
+    
+<!-- Панель инструментов (слева) -->
+    <div class='toolPanel'>
+        <div class='button'>
+            <button type='button' name='moveTool' title='Выделить и переместить' class='toolButton' style='background-image: url(icons/left-panel-tools/move.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='handTool' title='Рука' class='toolButton' style='background-image: url(icons/left-panel-tools/hand.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='selectTool' title='Выбор области' class='toolButton' style='background-image: url(icons/left-panel-tools/dotted-square.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='pencilTool' title='Карандаш' class='toolButton' style='background-image: url(icons/left-panel-tools/pencil.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='brushTool' title='Кисть' class='toolButton' style='background-image: url(icons/left-panel-tools/brush.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='eraserTool' title='Ластик' class='toolButton' style='background-image: url(icons/left-panel-tools/eraser.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='figuresTool' title='Фигуры' class='toolButton' style='background-image: url(icons/left-panel-tools/figures.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='lineTool' title='Линия' class='toolButton' style='background-image: url(icons/left-panel-tools/line.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='bucketTool' title='Заливка' class='toolButton' style='background-image: url(icons/left-panel-tools/bucket.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='textTool' title='Текст' class='toolButton' style='background-image: url(icons/left-panel-tools/text.svg)'></button>
+        </div>
+        <div class='button'>
+            <button type='button' name='pipetteTool' title='Пипетка' class='toolButton' style='background-image: url(icons/left-panel-tools/pipette.svg)'></button>
+        </div>
+    </div>
+    
+    <!-- Панель инструментов (справа) -->
+    <div class='rightPanel'>
+      
+       <!-- Палитра -->
+        <div class='palette'>
+            <div class='currentColors'>
+                <input type='color' name='mainColor' value='#000000' title='Основной цвет' class='colorPicker active'>
+                <input type='color' name='additionalColor' value='#ffffff' title='Дополнительный цвет' class='colorPicker'>
+                <div class='button'>
+                    <button type='button' name='swapColors' title='Поменять цвета местами' class='toolButton' style='background-image: url(icons/right-panel-tools/swap.svg)'></button>
+                    <button type='button' name='blackWhite' title='Черный и белый' class='toolButton' style='background-image: url(icons/right-panel-tools/black-and-white.svg)'></button>
+                </div>
+                
+            </div>
+            <div class='savedColors'>
+            <!-- -->
+            </div>
+        </div>
+        
+        <!-- Свойства инструмента -->
+        <div class='section preferences'></div>
+    </div>
+       
+    <!-- Панель снизу -->
+    <div class='bottomPanel'>
+        <div class='zoom'>
+            <input type='range' name='zoom' min='0' max='500' value='100'>
+        </div>
+    </div>
+    
+    
     <!-- Форма для создания нового изображения -->
-    <div class='form imageCreationForm'>
-        <form autocomplete='on'> 
+    <div class='form imageCreationForm disabled'>
+        <form autocomplete='on'>
             <div class='formTitle'><b>Новое Изображение</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -20,11 +130,11 @@
                 <input type='number' name='height' min='0' value='500' placeholder='0' required>
             </div>
             <div class='input'>
-               <label>Цвет фона</label>
-               <input type='color' name='canvasColor' value='#ffffff'>
+                <label>Цвет фона</label>
+                <input type='color' name='canvasColor' value='#ffffff'>
             </div>
             <div class='input'>
-               <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
+                <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
             </div>
             <div class='button' style="float:left">
                 <button type='button'>Отмена</button>
@@ -34,10 +144,10 @@
             </div>
         </form>
     </div>
-    
+
     <!-- Форма для изменения размера изображения -->
     <div class='form resizeForm disabled'>
-        <form autocomplete='on'> 
+        <form autocomplete='on'>
             <div class='formTitle'><b>Изменить Размер Изображения</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -55,10 +165,10 @@
             </div>
         </form>
     </div>
-    
+
     <!-- Форма для изменения размера полотна -->
     <div class='form resizeForm disabled'>
-        <form autocomplete='on'> 
+        <form autocomplete='on'>
             <div class='formTitle'><b>Изменить Размер Полотна</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -76,5 +186,7 @@
             </div>
         </form>
     </div>
+
 </body>
+
 </html>

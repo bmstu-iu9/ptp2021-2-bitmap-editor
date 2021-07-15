@@ -1,3 +1,8 @@
+html,
+body {
+    overflow: hidden;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -5,7 +10,6 @@ body {
     font-family: sans-serif;
     background: #E0E0E0;
 }
-
 
 .form {
     position: absolute;
@@ -16,19 +20,19 @@ body {
     background: #F5F5F5;
     border-radius: 10px;
     padding: 30px;
-    margin: -175px 0px 0px -100px;  
-    box-shadow: 0 0 16px rgba(0,0,0,0.1);
+    margin: -175px 0px 0px -100px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
 .disabled {
     display: none;
 }
 
-.imageCreationForm form{
+.imageCreationForm form {
     height: 350px;
 }
 
-.resizeForm form{
+.resizeForm form {
     height: 260px;
 }
 
@@ -39,7 +43,7 @@ body {
 }
 
 .form .input {
-    /* Блок с вводом данных */ 
+    /* Блок с вводом данных */
     position: relative;
     margin-bottom: 20px;
 }
@@ -58,7 +62,7 @@ body {
     border-radius: 8px;
     border: 1px solid silver;
     transition: 0.2s;
-} 
+}
 
 
 .form .input input[type='color'] {
@@ -74,7 +78,7 @@ body {
 
 .form .input input:focus {
     border: 1px solid #FFB300;
-} 
+}
 
 .form .input input[type='number']:valid {
     background: #fff;
@@ -100,17 +104,18 @@ body {
     background: #fff;
 }
 
-.form .button button:focus, 
+.form .button button:focus,
 .form .button button:hover {
     background: #E0E0E0;
 }
+
 .form .buttonOk button {
     color: #fff;
     border: none;
     background: #FFB300;
 }
 
-.form .buttonOk button:focus, 
+.form .buttonOk button:focus,
 .form .buttonOk button:hover {
     background: #FFCA28;
 }
@@ -119,3 +124,193 @@ body {
     background: #FFCA28;
 }
 
+/* Рабочая область */
+
+.workspace {
+    display: block;
+    position: absolute;
+    overflow: hidden;
+    top: 40px;
+    left: 60px;
+    bottom: 40px;
+    right: 220px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+
+.topLeftCorner {
+    border-top-left-radius: 0px;
+}
+
+/* Меню */
+
+.menuBar {
+    position: absolute;
+    margin: 0px;
+    padding-left: 60px;
+    height: 40px;
+}
+
+
+.menu {
+    position: relative;
+    width: 150px;
+    display: inline-block;
+    margin-right: -4px;
+}
+
+.menuTitle {
+    position: relative;
+    padding: 11px 12px;
+    text-align: center;
+}
+
+.menuTitle:hover {
+    background: #F5F5F5;
+}
+
+.menuList {
+    position: absolute;
+    width: 150px;
+    padding: 1px 0px;
+    background: #fff;
+    border-radius: 0px 0px 8px 8px;
+    padding: 8px 0px;
+}
+
+.menu .menuList {
+    display: none;
+}
+
+.menu.active {
+    border-radius: 0px 0px 8px 8px;
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+}
+
+.menu.active .menuList {
+    display: block;
+}
+
+.menu.active .menuTitle {
+    background: #fff;
+    display: block;
+}
+
+.menuItem {
+    margin: 0px 0px;
+    padding: 8px 24px;
+}
+
+.menuItem:hover,
+.menuItem:focus {
+    background: #FFECB3;
+}
+
+
+/* Панель инструментов (слева) */
+.toolPanel {
+    position: absolute;
+    top: 40px;
+    width: 60px;
+    text-align: center;
+}
+
+.toolPanel .button {
+    position: relative;
+    display: block;
+    padding: 12px;
+}
+
+.toolButton {
+    padding: 12px;
+    border: none;
+    width: 28px;
+    height: 28px;
+    background-size: cover;
+    background-color: #e0e0e0;
+    outline: none;
+}
+
+.toolPanel .button:hover,
+.toolPanel .button.active {
+    background: #f5f5f5;
+}
+
+.toolPanel .button:hover .toolButton,
+.toolPanel .button.active .toolButton {
+    background-color: #f5f5f5;
+}
+
+/* Панель инструментов справа */
+
+.rightPanel {
+    position: absolute;
+    right: 0px;
+    width: 220px;
+    top: 40px;
+    bottom: 60px;
+    overflow: hidden;
+}
+
+.rightPanel .palette {
+    position: relative;
+    margin: 0px 12px 12px 12px;
+}
+
+.currentColors .colorPicker {
+    width: 36px;
+    height: 36px;
+    margin-right: 8px;
+    border-radius: 8px;
+}
+
+.currentColors .colorPicker:hover,
+.currentColors .colorPicker.active {
+    border-color: #FFB300;
+}
+
+.currentColors .colorPicker.active {
+    border-width: 2px;
+}
+
+.currentColors .button {
+    position: absolute;
+    display: inline-block;
+}
+
+.currentColors .button .toolButton {
+    display: block;
+    margin-bottom: 8px;
+    padding: 0px;
+    width: 16px;
+    height: 16px;
+}
+
+.rightPanel .section {
+    position: relative;
+    box-sizing: content-box;
+    margin: 0px 12px 12px 12px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+}
+
+.rightPanel .preferences {
+    //height: 500px%;
+    padding: 16px;
+}
+
+/* Панель снизу */
+
+.bottomPanel {
+    position: absolute;
+    bottom: 0px;
+    height: 40px;
+    right: 220px;
+    overflow: hidden;
+}
+
+.bottomPanel .zoom {
+    padding: 12px;
+}
