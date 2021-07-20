@@ -119,8 +119,8 @@
     </div>
     
     <!-- Форма для создания нового изображения -->
-    <div class='form imageCreationForm disabled'>
-        <form autocomplete='on'>
+    <div class='form imageCreationForm'>
+        <form>
             <div class='formTitle'><b>Новое Изображение</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -138,17 +138,19 @@
                 <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
             </div>
             <div class='button' style="float:left">
-                <button type='button'>Отмена</button>
+                <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
-                <button type='button'>Создать</button>
+                <button type='button' name='createImage'>Создать</button>
             </div>
         </form>
     </div>
 
+   
+    <div class='overlay' hidden></div>
     <!-- Форма для изменения размера изображения -->
-    <div class='form resizeForm disabled'>
-        <form autocomplete='on'>
+    <div class='form imageResizeForm'>
+        <form>
             <div class='formTitle'><b>Изменить Размер Изображения</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -159,17 +161,17 @@
                 <input type='number' name='height' min='0' value='500' placeholder='0' required>
             </div>
             <div class='button' style="float:left">
-                <button type='button'>Отмена</button>
+                <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
-                <button type='button'>Ок</button>
+                <button type='button' name='resizeImage'>Ок</button>
             </div>
         </form>
     </div>
 
     <!-- Форма для изменения размера полотна -->
-    <div class='form resizeForm disabled'>
-        <form autocomplete='on'>
+    <div class='form canvasResizeForm'>
+        <form>
             <div class='formTitle'><b>Изменить Размер Полотна</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
@@ -180,10 +182,10 @@
                 <input type='number' name='height' min='0' value='500' placeholder='0' required>
             </div>
             <div class='button' style="float:left">
-                <button type='button'>Отмена</button>
+                <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
-                <button type='button'>Ок</button>
+                <button type='button' name='resizeCanvas'>Ок</button>
             </div>
         </form>
     </div>
