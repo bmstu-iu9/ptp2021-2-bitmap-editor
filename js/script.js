@@ -2,6 +2,12 @@
 
 let menuBar = document.querySelector(".menuBar");
 let menuBtn = document.querySelector(".menu");
+let canvas = document.querySelector("canvas");
+let context = canvas.getContext("2d");
+let canvasWidth = 500;
+let canvasHeight = 500;
+let canvasBackgroundColor = "#ffffff";
+let canvasIsTransparent = "false";
 
 /* Убираем зазор между рабочей областью и вкладкой меню "Файл", когда наводим на нее */
 menuBtn.addEventListener("mouseover", () => {
