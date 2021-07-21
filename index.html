@@ -10,7 +10,7 @@
 
 <body>
     <div class='workspace'>
-        <canvas id="canvas">Холст</canvas>
+        <canvas class='canvas' id='canvas' width='500' height='500'>Холст</canvas>
     </div>
 
     <!-- Меню -->
@@ -19,7 +19,10 @@
             <div class='menuTitle'>Файл</div>
             <div class='menuList'>
                 <div class='menuItem' id='createImage'>Создать</div>
-                <div class='menuItem' id='openImage'>Открыть</div>
+                <label class='menuItem' for='openImage' style='display: block'>
+                    Открыть
+                </label>
+                <input type='file' id='openImage' class='menuItem' accept='image/jpeg, image/png, image/bmp' hidden>
                 <div class='menuItem' id='saveImage'>Сохранить</div>
             </div>
         </div>
@@ -50,8 +53,8 @@
             </div>
         </div>
     </div>
-    
-<!-- Панель инструментов (слева) -->
+
+    <!-- Панель инструментов (слева) -->
     <div class='toolPanel'>
         <div class='button'>
             <button type='button' name='moveTool' title='Выделить и переместить' class='toolButton' style='background-image: url(icons/left-panel-tools/move.svg)'></button>
@@ -87,11 +90,11 @@
             <button type='button' name='pipetteTool' title='Пипетка' class='toolButton' style='background-image: url(icons/left-panel-tools/pipette.svg)'></button>
         </div>
     </div>
-    
+
     <!-- Панель инструментов (справа) -->
     <div class='rightPanel'>
-      
-       <!-- Палитра -->
+
+        <!-- Палитра -->
         <div class='palette'>
             <div class='currentColors'>
                 <input type='color' name='mainColor' value='#000000' title='Основной цвет' class='colorPicker active'>
@@ -100,42 +103,42 @@
                     <button type='button' name='swapColors' title='Поменять цвета местами' class='toolButton' style='background-image: url(icons/right-panel-tools/swap.svg)'></button>
                     <button type='button' name='blackWhite' title='Черный и белый' class='toolButton' style='background-image: url(icons/right-panel-tools/black-and-white.svg)'></button>
                 </div>
-                
+
             </div>
             <div class='savedColors'>
-            <!-- -->
+                <!-- -->
             </div>
         </div>
-        
+
         <!-- Свойства инструмента -->
         <div class='section preferences'></div>
     </div>
-       
+
     <!-- Панель снизу -->
     <div class='bottomPanel'>
         <div class='zoom'>
             <input type='range' name='zoom' min='0' max='500' value='100'>
         </div>
     </div>
-    
+   
     <!-- Форма для создания нового изображения -->
     <div class='form imageCreationForm'>
         <form>
             <div class='formTitle'><b>Новое Изображение</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
-                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+                <input type='number' name='width' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Высота, пикс.</label>
-                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+                <input type='number' name='height' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Цвет фона</label>
-                <input type='color' name='canvasColor' value='#ffffff'>
+                <input type='color' name='canvasColor' value='#ffffff' onclick='formColorInputClick()'>
             </div>
             <div class='input'>
-                <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
+                <label><input type='checkbox' name='canvasIsTransparent' value='true' onclick='formCheckboxClick()'>Прозрачный</label>
             </div>
             <div class='button' style="float:left">
                 <button type='button' name='cancel'>Отмена</button>
@@ -146,19 +149,23 @@
         </form>
     </div>
 
-   
     <div class='overlay' hidden></div>
+    
     <!-- Форма для изменения размера изображения -->
     <div class='form imageResizeForm'>
         <form>
             <div class='formTitle'><b>Изменить Размер Изображения</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
-                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+                <input type='number' name='width' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Высота, пикс.</label>
-                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+                <input type='number' name='height' min='0' value='500' placeholder='0'>
+            </div>
+            <div class='input'>
+                <label><input type='checkbox' name='percent' value='true' onclick='formCheckboxClick()'>Процент</label>
+                <input type='number' name='height' min='0' value='100' max='2000' placeholder='0' disabled>
             </div>
             <div class='button' style="float:left">
                 <button type='button' name='cancel'>Отмена</button>
@@ -175,11 +182,15 @@
             <div class='formTitle'><b>Изменить Размер Полотна</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
-                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+                <input type='number' name='width' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Высота, пикс.</label>
-                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+                <input type='number' name='height' min='0' value='500' placeholder='0'>
+            </div>
+            <div class='input'>
+                <label><input type='checkbox' name='percent' value='true' onclick='formCheckboxClick()'>Процент</label>
+                <input type='number' name='height' min='0' value='100' max='2000' placeholder='0' disabled>
             </div>
             <div class='button' style="float:left">
                 <button type='button' name='cancel'>Отмена</button>
@@ -190,7 +201,7 @@
         </form>
     </div>
 
-<script src='js/script.js'></script>
+    <script src='js/script.js'></script>
 </body>
 
 </html>

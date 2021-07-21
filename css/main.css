@@ -131,7 +131,7 @@ body {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
+    background-color: rgba(0, 0, 0, 0.5);
     width: 100vw;
     height: 100vh;
 }
@@ -151,22 +151,19 @@ body {
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
-
 .topLeftCorner {
     border-top-left-radius: 0px;
 }
 
 /* Холст */
-#canvas {
+.canvas {
     position: absolute;
     display: block;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
     margin: auto;
-    height: 500px;
-    width: 500px;
     border: 1px solid #E0E0E0;
 }
 
