@@ -12,6 +12,25 @@ let backgroundColor = "transparent";
 let workspace = document.querySelector(".workspace");
 let canvasClass = document.querySelector(".canvas");
 
+window.addEventListener("load", () => {
+    centerCanvas();
+
+    let buttons = document.querySelectorAll("form > div > button");
+    for (let button of buttons) {
+        button.addEventListener("click", buttonClick);
+    }
+})
+
+document.addEventListener("mousedown", () => {
+    let target = event.target;
+    /* Закрываем вкладку меню по клику вне строки меню */
+    let isMenuBar = (target == menuBar || menuBar.contains(target));
+    let activeMenu = document.querySelector(".menu.active");
+    if (!isMenuBar && activeMenu != null) {
+        toggleMenu(activeMenu);
+    }
+})
+
 /* Убираем зазор между рабочей областью и вкладкой меню "Файл", когда наводим на нее */
 menuBtn.addEventListener("mouseover", () => {
     document.querySelector(".workspace").classList.add("topLeftCorner");
@@ -28,21 +47,22 @@ function toggleMenu(menu) {
 }
 
 function menuItemClick(menuItem) {
-    toggleMenu(menuItem.closest(".menu"));
-    if (menuItem.id == "createImage") {
-        showForm(".imageCreationForm");
-    }
-    if (menuItem.id == "openImage") {
+    if (menuItem.id != "openImage") {
         toggleMenu(menuItem.closest(".menu"));
     }
-    if (menuItem.id == "saveImage") {
-        saveImage();
-    }
-    if (menuItem.id == "imageSize") {
-        showForm(".imageResizeForm");
-    }
-    if (menuItem.id == "canvasSize") {
-        showForm(".canvasResizeForm");
+    switch (menuItem.id) {
+        case "createImage":
+            showForm(".imageCreationForm");
+            break;
+        case "saveImage":
+            saveImage();
+            break;
+        case "resizeImage":
+            showForm(".imageResizeForm");
+            break;
+        case "resizeCanvas":
+            showForm(".canvasResizeForm");
+            break;
     }
 }
 
@@ -54,7 +74,7 @@ function menuClick(menu) {
     toggleMenu(menu);
 }
 
-menuBar.addEventListener("click", () => {
+menuBar.addEventListener("mousedown", () => {
     let target = event.target;
     let menu = target.closest(".menu");
     if (target.classList == "menuItem") {
@@ -73,25 +93,7 @@ menuBar.addEventListener("mouseover", () => {
     }
 })
 
-document.addEventListener("click", () => {
-    let target = event.target;
-
-    /* Закрываем вкладку меню по клику вне строки меню */
-    let isMenuBar = (target == menuBar || menuBar.contains(target));
-    let activeMenu = document.querySelector(".menu.active");
-    if (!isMenuBar && activeMenu != null) {
-        toggleMenu(activeMenu);
-    }
-})
-
 /* Формы */
-
-window.addEventListener("load", () => {
-    let buttons = document.querySelectorAll("form > div > button");
-    for (let button of buttons) {
-        button.addEventListener("click", buttonClick);
-    }
-})
 
 function formColorInputClick() {
     document.querySelector("input[name=canvasIsTransparent]").checked = false;
@@ -155,21 +157,25 @@ function buttonClick() {
     switch (button.name) {
         case "cancel":
             closeForm();
+            break;
         case "createImage":
             if (inputIsValid()) {
                 closeForm();
                 createNewImage();
             };
+            break;
         case "resizeImage":
             if (inputIsValid()) {
                 closeForm();
                 resizeImage();
             };
+            break;
         case "resizeCanvas":
             if (inputIsValid()) {
                 closeForm();
                 resizeCanvas();
             };
+            break;
     }
 }
 
@@ -199,22 +205,32 @@ function createNewImage() {
         context.fillStyle = backgroundColor;
         context.fillRect(0, 0, canvasWidth, canvasHeight);
     }
-    centerCanvas()
+    centerCanvas();
 }
 
-document.querySelector("#openImage").addEventListener("change", handleImage, false);
 
-function handleImage(event) {
+/* костыль, судя по всему */
+document.querySelector("#openImage").addEventListener("mouseup", () => {
+    document.querySelector(".menu").classList.remove("active");
+});
+
+document.querySelector("#openImage").addEventListener("change", () => {
+    let file = event.target.files[0];
+    if (file) {
+        openImage(file);
+    }
+});
+
+function openImage(file) {
     clearCanvas();
     let reader = new FileReader();
-    let file = event.target.files[0];
     let image = new Image();
     image.onload = function () {
         setCanvasValues(image.width, image.height, "transparent");
         context.drawImage(image, 0, 0);
         centerCanvas();
     }
-    reader.onloadend = function () {
+    reader.onload = function () {
         image.src = reader.result;
     }
     reader.readAsDataURL(file);

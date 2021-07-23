@@ -19,10 +19,10 @@
             <div class='menuTitle'>Файл</div>
             <div class='menuList'>
                 <div class='menuItem' id='createImage'>Создать</div>
-                <label class='menuItem' for='openImage' style='display: block'>
+                <label class='menuItem' id='openImage' style='display: block'>
                     Открыть
+                    <input type='file' accept='image/jpeg, image/png, image/bmp' hidden>
                 </label>
-                <input type='file' id='openImage' class='menuItem' accept='image/jpeg, image/png, image/bmp' hidden>
                 <div class='menuItem' id='saveImage'>Сохранить</div>
             </div>
         </div>
@@ -40,8 +40,8 @@
         <div class='menu'>
             <div class='menuTitle'>Изображение</div>
             <div class='menuList'>
-                <div class='menuItem' id='imageSize'>Размер изображения</div>
-                <div class='menuItem' id='canvasSize'>Размер полотна</div>
+                <div class='menuItem' id='resizeImage'>Размер изображения</div>
+                <div class='menuItem' id='resizeCanvas'>Размер полотна</div>
             </div>
         </div>
         <div class='menu'>
@@ -120,7 +120,7 @@
             <input type='range' name='zoom' min='0' max='500' value='100'>
         </div>
     </div>
-   
+
     <!-- Форма для создания нового изображения -->
     <div class='form imageCreationForm'>
         <form>
@@ -150,7 +150,7 @@
     </div>
 
     <div class='overlay' hidden></div>
-    
+
     <!-- Форма для изменения размера изображения -->
     <div class='form imageResizeForm'>
         <form>
