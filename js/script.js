@@ -10,9 +10,11 @@ let canvasHeight = 500;
 let backgroundColor = "transparent";
 
 let workspace = document.querySelector(".workspace");
+let canvasArea = document.querySelector(".canvasArea");
 let canvasClass = document.querySelector(".canvas");
 
 window.addEventListener("load", () => {
+    resizeCanvasArea();
     centerCanvas();
 
     let buttons = document.querySelectorAll("form > div > button");
@@ -205,6 +207,7 @@ function createNewImage() {
         context.fillStyle = backgroundColor;
         context.fillRect(0, 0, canvasWidth, canvasHeight);
     }
+    resizeCanvasArea();
     centerCanvas();
 }
 
@@ -228,6 +231,7 @@ function openImage(file) {
     image.onload = function () {
         setCanvasValues(image.width, image.height, "transparent");
         context.drawImage(image, 0, 0);
+        resizeCanvasArea();
         centerCanvas();
     }
     reader.onload = function () {
@@ -236,12 +240,21 @@ function openImage(file) {
     reader.readAsDataURL(file);
 }
 
+function resizeCanvasArea() {
+    let width = canvasWidth * 2;
+    let height = canvasHeight * 2;
+    canvasArea.style.width = width + "px";
+    canvasArea.style.height = height + "px";
+}
+
 function centerCanvas() {
     canvasClass.style.top = "0px";
     canvasClass.style.right = "0px";
     canvasClass.style.bottom = "0px";
     canvasClass.style.left = "0px";
     canvasClass.style.margin = "auto";
+
+    canvas.scrollIntoView();
 }
 
 function resizeImage() {
@@ -259,6 +272,7 @@ function resizeImage() {
         setCanvasValues(inputs[0].value, inputs[1].value);
     }
     context.drawImage(tempCanvas, 0, 0, canvasWidth, canvasHeight);
+    resizeCanvasArea();
     centerCanvas();
 }
 
@@ -272,6 +286,7 @@ function resizeCanvas() {
         setCanvasValues(inputs[0].value, inputs[1].value);
     }
     context.putImageData(imgData, 0, 0);
+    resizeCanvasArea();
     centerCanvas();
 }
 
