@@ -23,16 +23,6 @@ window.addEventListener("load", () => {
     }
 })
 
-document.addEventListener("mousedown", () => {
-    let target = event.target;
-    /* Закрываем вкладку меню по клику вне строки меню */
-    let isMenuBar = (target == menuBar || menuBar.contains(target));
-    let activeMenu = document.querySelector(".menu.active");
-    if (!isMenuBar && activeMenu != null) {
-        toggleMenu(activeMenu);
-    }
-})
-
 /* Убираем зазор между рабочей областью и вкладкой меню "Файл", когда наводим на нее */
 menuBtn.addEventListener("mouseover", () => {
     document.querySelector(".workspace").classList.add("topLeftCorner");
@@ -44,12 +34,22 @@ menuBtn.addEventListener("mouseout", () => {
 
 /* Меню */
 
+function removeMenuEvents() {
+    document.removeEventListener("mousedown", closeMenu);
+    menuBar.removeEventListener("mouseover", menuHover);
+}
+
+function addMenuEvents() {
+    document.addEventListener("mousedown", closeMenu);
+    menuBar.addEventListener("mouseover", menuHover);
+}
+
 function toggleMenu(menu) {
     menu.classList.toggle("active");
 }
 
 function menuItemClick(menuItem) {
-    if (menuItem.id != "openImage") {
+    if (menuItem.id != "openImage" && menuItem.id != "insertImage") {
         toggleMenu(menuItem.closest(".menu"));
     }
     switch (menuItem.id) {
@@ -69,31 +69,47 @@ function menuItemClick(menuItem) {
 }
 
 function menuClick(menu) {
-    let activeMenu = document.querySelector(".menu.active");
-    if (activeMenu != null && activeMenu != menu) {
-        toggleMenu(activeMenu);
+    if (menu.classList.contains("active")) {
+        removeMenuEvents();
+    } else {
+        addMenuEvents();
     }
     toggleMenu(menu);
 }
 
-menuBar.addEventListener("mousedown", () => {
+menuBar.addEventListener("mousedown", menuBarClick);
+
+function menuBarClick() {
+    event.preventDefault();
+    event.stopPropagation();
+
     let target = event.target;
     let menu = target.closest(".menu");
-    if (target.classList == "menuItem") {
+    if (target.classList == "hotkey") {
+        removeMenuEvents();
+        menuItemClick(target.closest(".menuItem"));
+    } else if (target.classList == "menuItem") {
+        removeMenuEvents();
         menuItemClick(target);
     } else {
         menuClick(menu);
     }
-})
+}
 
-menuBar.addEventListener("mouseover", () => {
+function menuHover() {
     let target = event.target.closest(".menu");
     let activeMenu = document.querySelector(".menu.active");
-    if (activeMenu != null && activeMenu != target) {
+    if (activeMenu != target) {
         toggleMenu(activeMenu);
         toggleMenu(target);
     }
-})
+}
+
+function closeMenu() {
+    /* Закрываем вкладку меню по клику вне строки меню */
+    toggleMenu(document.querySelector(".menu.active"));
+    removeMenuEvents();
+}
 
 /* Формы */
 
@@ -115,12 +131,26 @@ function showForm(formClass) {
     document.querySelector(".overlay").removeAttribute("hidden");
     let form = document.querySelector(formClass);
     setFormValues(form);
+    document.addEventListener("keydown", formKeyDown);
     form.classList.add("active");
+}
+
+function formKeyDown() {
+    if (event.key == "Enter") {
+        let form = document.querySelector(".form.active");
+        form.querySelectorAll("button")[1].click();
+        if (form.classList.contains("imageCreationForm")) {
+            form.querySelector("input[type=color]").blur();
+        }
+    } else if (event.key == "Escape") {
+        document.querySelector(".form.active").querySelectorAll("button")[0].click();
+    }
 }
 
 function closeForm() {
     document.querySelector(".overlay").setAttribute("hidden", true);
     document.querySelector(".form.active").classList.remove("active");
+    document.removeEventListener("keydown", formKeyDown);
 }
 
 function setFormValues(form) {
@@ -181,6 +211,8 @@ function buttonClick() {
     }
 }
 
+/* взаимодействие с холстом */
+
 function setCanvasValues(width, height, bgcolor = backgroundColor) {
     canvasWidth = width;
     canvasHeight = height;
@@ -238,6 +270,7 @@ function openImage(file) {
         image.src = reader.result;
     }
     reader.readAsDataURL(file);
+    document.querySelector("input[name=openImage]").value = null;
 }
 
 function resizeCanvasArea() {
@@ -296,4 +329,28 @@ function saveImage() {
     link.href = canvas.toDataURL();
     link.click();
     link.delete;
+}
+
+document.addEventListener("keydown", hotkeyPress);
+
+function hotkeyPress() {
+    if (event.altKey) {
+        switch (event.key) {
+            case "n":
+                showForm(".imageCreationForm");
+                break;
+            case "o":
+                document.querySelector("input[name=openImage]").click();
+                break;
+            case "s":
+                saveImage();
+                break;
+            case "t":
+                showForm(".imageResizeForm");
+                break;
+            case "y":
+                showForm(".canvasResizeForm");
+                break;
+        }
+    }
 }

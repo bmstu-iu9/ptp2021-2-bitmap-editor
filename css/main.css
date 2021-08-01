@@ -44,6 +44,7 @@ body {
 .canvas.resizeForm form {
     height: 260px;
 }
+
 .formTitle {
     text-align: center;
     font-size: 18px;
@@ -239,6 +240,10 @@ body {
 .menuItem {
     margin: 0px 0px;
     padding: 8px 24px;
+}
+
+.menuItem .hotkey {
+    color: gray;
 }
 
 .menuItem:hover,

@@ -20,12 +20,24 @@
         <div class='menu'>
             <div class='menuTitle'>Файл</div>
             <div class='menuList'>
-                <div class='menuItem' id='createImage'>Создать</div>
+                <div class='menuItem' id='createImage'>
+                    Создать
+                    <span class='hotkey'>Alt+N</span>
+                </div>
                 <label class='menuItem' id='openImage' style='display: block'>
                     Открыть
-                    <input type='file' accept='image/jpeg, image/png, image/bmp' hidden>
+                    <span class='hotkey'>Alt+O</span>
+                    <input type='file' accept='image/jpeg, image/png, image/bmp' name='openImage' hidden>
                 </label>
-                <div class='menuItem' id='saveImage'>Сохранить</div>
+                <label class='menuItem' id='insertImage' style='display: block'>
+                    Поместить изображение
+                    <span class='hotkey'>Alt+P</span>
+                    <input type='file' accept='image/jpeg, image/png, image/bmp' name='insertImage' hidden>
+                </label>
+                <div class='menuItem' id='saveImage'>
+                    Сохранить
+                    <span class='hotkey'>Alt+S</span>
+                </div>
             </div>
         </div>
         <div class='menu'>
@@ -42,8 +54,14 @@
         <div class='menu'>
             <div class='menuTitle'>Изображение</div>
             <div class='menuList'>
-                <div class='menuItem' id='resizeImage'>Размер изображения</div>
-                <div class='menuItem' id='resizeCanvas'>Размер полотна</div>
+                <div class='menuItem' id='resizeImage'>
+                    Размер изображения
+                    <span class='hotkey'>Alt+T</span>
+                </div>
+                <div class='menuItem' id='resizeCanvas'>
+                    Размер полотна
+                    <span class='hotkey'>Alt+Y</span>
+                </div>
             </div>
         </div>
         <div class='menu'>
