@@ -348,6 +348,26 @@ body {
     padding: 16px;
 }
 
+.rightPanel .insertImageButtons {
+    position: relative;
+    margin: 0px 12px 12px 12px;
+}
+
+.insertImageButtons button {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: none;
+    background-size: cover;
+    background-color: #e0e0e0;
+    outline: none;
+}
+
+.insertImageButtons button:hover,
+.insertImageButtons button:active {
+    background-color: #f5f5f5;
+}
+
 /* Панель снизу */
 
 .bottomPanel {
@@ -390,4 +410,96 @@ body {
 
 ::-webkit-scrollbar-corner {
     background: transparent;
+}
+
+
+
+/* выделение */
+
+.selectionContainer {
+    position: absolute;
+    display: block;
+    cursor: move;
+}
+
+.selectionContainer img {
+    display: block;
+    outline: 2px solid #FFB300;
+}
+
+.selectionHandle {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #FFB300;
+    border-radius: 8px;
+}
+
+.selectionHandle.NE {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.selectionHandle.NW {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.selectionHandle.SE {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+    background: #FF6F00;
+}
+
+.selectionHandle.SW {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.selectionHandle.N {
+    top: -5px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+
+.selectionHandle.E {
+    top: 50%;
+    right: -5px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+
+.selectionHandle.S {
+    bottom: -5px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+
+.selectionHandle.W {
+    top: 50%;
+    left: -5px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: w-resize;
+}
+
+.rotationHandle {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 8px;
+    right: -10px;
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
 }
