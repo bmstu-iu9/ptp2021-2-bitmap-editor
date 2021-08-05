@@ -23,6 +23,10 @@ window.addEventListener("load", () => {
     }
     document.querySelector("button[name=insertImage]").addEventListener("click", insertImageButtonClick);
     document.querySelector("button[name=cancelImageInsertion]").addEventListener("click", cancelImageInsertionClick);
+    document.querySelector("button[name=flipHorizontally]").addEventListener("click", flipContainerHorizontally);
+    document.querySelector("button[name=flipVertically]").addEventListener("click", flipContainerVertically);
+    document.querySelector("button[name=rotateLeft]").addEventListener("click", rotateLeft);
+    document.querySelector("button[name=rotateRight]").addEventListener("click", rotateRight);
 })
 
 /* Убираем зазор между рабочей областью и вкладкой меню "Файл", когда наводим на нее */
@@ -374,7 +378,7 @@ function openImageToInsert(file) {
     let reader = new FileReader();
     let image = new Image();
     image.onload = function () {
-        initImageInsertion(image);
+        initImageSelection(image);
     }
     reader.onload = function () {
         image.src = reader.result;
@@ -387,35 +391,51 @@ let containerState = {
         minWidth: 10,
         minHeight: 10,
         img: new Image(),
+        scaleX: 1,
+        scaleY: 1,
     },
-    container, containerAngle, angle;
+    container, containerWrapper, containerAngle, angle;
 
-function initImageInsertion(image) {
+function initHandles() {
+    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle N top'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle E right'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle W left'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle NE top right'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle NW top left'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='rotationHandle N'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='rotationHandle E'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='rotationHandle W'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='rotationHandle NE'></span>")
+    container.insertAdjacentHTML("afterbegin", "<span class='rotationHandle NW'></span>")
+    container.insertAdjacentHTML("beforeend", "<span class='selectionHandle SE bottom right'></span>")
+    container.insertAdjacentHTML("beforeend", "<span class='selectionHandle SW bottom left'></span>")
+    container.insertAdjacentHTML("beforeend", "<span class='selectionHandle S bottom'></span>")
+    container.insertAdjacentHTML("beforeend", "<span class='rotationHandle SE'></span>")
+    container.insertAdjacentHTML("beforeend", "<span class='rotationHandle SW'></span>")
+    container.insertAdjacentHTML("beforeend", "<span class='rotationHandle S'></span>")
+}
+
+function initImageSelection(image) {
+    containerWrapper = document.createElement("div");
+    containerWrapper.classList = "selectionWrapper";
     container = document.createElement("div");
     container.classList = "selectionContainer";
-    canvasArea.append(container);
+    canvasArea.append(containerWrapper);
+    containerWrapper.append(container);
 
     containerState.img.src = image.src;
     container.insertAdjacentHTML("afterbegin", "<img src='" + image.src + "' id='selectedImage'>")
 
-    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle N'></span>")
-    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle E'></span>")
-    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle W'></span>")
-    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle NE'></span>")
-    container.insertAdjacentHTML("afterbegin", "<span class='selectionHandle NW'></span>")
-    container.insertAdjacentHTML("beforeend", "<span class='selectionHandle SE'></span>")
-    container.insertAdjacentHTML("beforeend", "<span class='selectionHandle SW'></span>")
-    container.insertAdjacentHTML("beforeend", "<span class='selectionHandle S'></span>")
-    container.insertAdjacentHTML("beforeend", "<span class='rotationHandle'></span>")
-
-    container.style.top = "50%";
-    container.style.left = "50%";
+    initHandles();
 
     let handles = container.querySelectorAll(".selectionHandle");
     for (let handle of handles) {
         handle.addEventListener("mousedown", startResize);
     }
-    //container.querySelector(".rotationHandle").addEventListener("mousedown", startRotation);
+    handles = container.querySelectorAll(".rotationHandle");
+    for (let handle of handles) {
+        handle.addEventListener("mousedown", startRotation);
+    }
 
     removeDocumentEvents();
 
@@ -439,24 +459,25 @@ function returnDocumentEvents() {
 }
 
 function insertImage() {
-    //saveContainerState()
+    saveContainerState()
     let image = document.querySelector("#selectedImage");
-    let x = container.offsetLeft - canvas.offsetLeft;
-    let y = container.offsetTop - canvas.offsetTop;
-    /*let centerX = containerState.left + containerState.width / 2;
-    let centerY = containerState.top + containerState.height / 2;
+
+    let x = containerState.left - containerState.width / 2 - canvas.offsetLeft;
+    let y = containerState.top - containerState.height / 2 - canvas.offsetTop;
+    let centerX = containerState.left - containerState.width / 2 + containerState.width / 2;
+    let centerY = containerState.top - containerState.height / 2 + containerState.height / 2;
     context.save();
     context.translate(x + containerState.width / 2, y + containerState.height / 2);
     context.rotate(containerAngle);
-    context.drawImage(image, -containerState.width / 2, -containerState.height / 2, image.width, image.height);*/
-    context.drawImage(image, x, y, image.width, image.height);
-    //context.restore();
+    context.scale(containerState.scaleX, containerState.scaleY);
+    context.drawImage(image, -containerState.width / 2, -containerState.height / 2, image.width, image.height);
+    context.restore();
 }
 
 function insertImageButtonClick() {
     insertImage();
     returnDocumentEvents();
-    container.remove();
+    containerWrapper.remove();
     document.removeEventListener("keydown", imageInsertionKeyPress);
     document.querySelector(".palette").removeAttribute("hidden");
     document.querySelector(".insertImageButtons").setAttribute("hidden", true);
@@ -464,7 +485,7 @@ function insertImageButtonClick() {
 
 function cancelImageInsertionClick() {
     returnDocumentEvents();
-    container.remove();
+    containerWrapper.remove();
     document.removeEventListener("keydown", imageInsertionKeyPress);
     document.querySelector(".palette").removeAttribute("hidden");
     document.querySelector(".insertImageButtons").setAttribute("hidden", true);
@@ -510,114 +531,87 @@ function endResize() {
 }
 
 function saveContainerState() {
-    containerState.width = container.clientWidth;
-    containerState.height = container.clientHeight;
-    containerState.left = container.offsetLeft;
-    containerState.top = container.offsetTop;
+    containerState.width = containerWrapper.clientWidth;
+    containerState.height = containerWrapper.clientHeight;
+    containerState.left = containerWrapper.offsetLeft;
+    containerState.top = containerWrapper.offsetTop;
     containerState.mouseX = event.clientX + workspace.scrollLeft;
     containerState.mouseY = event.clientY + workspace.scrollTop;
     containerState.event = event;
 }
 
 function resizing() {
-    let mouseX = event.clientX + workspace.scrollLeft - workspace.offsetLeft;
-    let mouseY = event.clientY + workspace.scrollTop - workspace.offsetTop;
-
-    let width, height, left, top;
-
-    let handleClassList = containerState.event.target.classList;
-
-    if (handleClassList.contains("SE")) {
-        width = mouseX - containerState.left;
-        if (event.shiftKey) {
-            height = width * containerState.img.height / containerState.img.width;
-        } else {
-            height = mouseY - containerState.top;
-        }
+    let width = containerState.width,
+        height = containerState.height,
+        angle = (containerAngle > 0 ? containerAngle : containerAngle + 2 * Math.PI),
+        mouseX = event.clientX + workspace.scrollLeft,
+        mouseY = event.clientY + workspace.scrollTop,
+        cos = Math.cos(angle),
+        sin = Math.sin(angle),
+        handleClassList = containerState.event.target.classList,
+        dx = mouseX - containerState.mouseX,
+        dy = mouseY - containerState.mouseY,
+        rdx = cos * dx + sin * dy,
+        rdy = -sin * dx + cos * dy,
+        top = containerState.top,
         left = containerState.left;
-        top = containerState.top;
 
-    } else if (handleClassList.contains("SW")) {
-        width = containerState.width + containerState.left - mouseX;
-        if (event.shiftKey) {
-            height = width * containerState.img.height / containerState.img.width;
-        } else {
-            height = mouseY - containerState.top;
+    if (handleClassList.contains("right")) {
+        width = containerState.width + rdx;
+        if (width < containerState.minWidth) {
+            width = containerState.minWidth;
+            rdx = containerState.minWidth - containerState.width;
         }
-        left = mouseX;
-        top = containerState.top;
-
-    } else if (handleClassList.contains("NW")) {
-        width = containerState.width + containerState.left - mouseX;
-        left = mouseX;
-        if (event.shiftKey) {
-            height = width * containerState.img.height / containerState.img.width;
-            top = containerState.top + containerState.height - height;
-        } else {
-            height = containerState.height + containerState.top - mouseY;
-            top = mouseY;
+    } else if (handleClassList.contains("left")) {
+        width = containerState.width - rdx;
+        if (width < containerState.minWidth) {
+            width = containerState.minWidth;
+            rdx = containerState.width - containerState.minWidth;
         }
-
-    } else if (handleClassList.contains("NE")) {
-        width = mouseX - containerState.left;
-        left = container.offsetLeft;
-        if (event.shiftKey) {
-            height = width * containerState.img.height / containerState.img.width;
-            top = containerState.top + containerState.height - height;
-        } else {
-            height = containerState.height + containerState.top - mouseY;
-            top = mouseY;
+    }
+    if (handleClassList.contains("top")) {
+        height = containerState.height - rdy;
+        if (height < containerState.minHeight) {
+            height = containerState.minHeight;
+            rdy = containerState.height - containerState.minHeight;
         }
-    } else if (handleClassList.contains("N")) {
-        height = containerState.height + containerState.top - mouseY;
-        top = mouseY;
-        if (event.shiftKey) {
-            width = height * containerState.img.width / containerState.img.height;
-            left = containerState.left - (width - containerState.width) / 2;
-        } else {
-            width = container.clientWidth;
-            left = container.offsetLeft;
-        }
-
-    } else if (handleClassList.contains("E")) {
-        width = mouseX - containerState.left;
-        left = container.offsetLeft;
-        if (event.shiftKey) {
-            height = width * containerState.img.height / containerState.img.width;
-            top = containerState.top - (height - containerState.height) / 2;
-        } else {
-            height = container.clientHeight;
-            top = container.offsetTop;
-        }
-
-    } else if (handleClassList.contains("S")) {
-        height = mouseY - containerState.top;
-        top = container.offsetTop;
-        if (event.shiftKey) {
-            width = height * containerState.img.width / containerState.img.height;
-            left = containerState.left - (width - containerState.width) / 2;
-        } else {
-            width = container.clientWidth;
-            left = container.offsetLeft;
-        }
-
-    } else if (handleClassList.contains("W")) {
-        width = containerState.width - (mouseX - containerState.left);
-        left = mouseX;
-        if (event.shiftKey) {
-            height = width * containerState.img.height / containerState.img.width;
-            top = containerState.top - (height - containerState.height) / 2;
-        } else {
-            height = container.clientHeight;
-            top = container.offsetTop;
+    } else if (handleClassList.contains("bottom")) {
+        height = containerState.height + rdy;
+        if (height < containerState.minHeight) {
+            height = containerState.minHeight;
+            rdy = containerState.minHeight - containerState.height;
         }
     }
 
-    if (width > containerState.minWidth && height > containerState.minHeight) {
-        resizeSelectedImage(width, height);
-        container.style.top = top + "px";
-        container.style.left = left + "px";
+   if (event.shiftKey) {
+        if (handleClassList.contains("right") || handleClassList.contains("left")) {
+            height = width * containerState.img.height / containerState.img.width;
+            if (handleClassList.contains("top")) {
+                rdy = containerState.height - height;
+            } else if (handleClassList.contains("bottom")) {
+                rdy = -containerState.height + height;
+            }
+        } else if (handleClassList.contains("top") || handleClassList.contains("bottom")) {
+            width = height * containerState.img.width / containerState.img.height;
+            if (handleClassList.contains("right")) {
+                rdx = -containerState.height + height;
+            } else if (handleClassList.contains("left")) {
+                rdx = containerState.height - height;
+            }
+        }
     }
+
+    if (handleClassList.contains("right") || handleClassList.contains("left")) {
+        left += cos * rdx / 2;
+        top += sin * rdx / 2;
+    }
+    if (handleClassList.contains("top") || handleClassList.contains("bottom")) {
+        left -= sin * rdy / 2;
+        top += cos * rdy / 2;
+    }
+
+    resizeContainer(width, height);
+    moveContainer(left, top);
 }
 
 function resizeSelectedImage(width, height) {
@@ -643,7 +637,88 @@ function endMoving() {
 function moving() {
     let mouseX = event.clientX + workspace.scrollLeft;
     let mouseY = event.clientY + workspace.scrollTop;
+    moveContainer(containerState.left + mouseX - containerState.mouseX, containerState.top + mouseY - containerState.mouseY);
+}
 
-    container.style.left = containerState.left + mouseX - containerState.mouseX + "px";
-    container.style.top = containerState.top + mouseY - containerState.mouseY + "px";
+function startRotation() {
+    event.preventDefault();
+    event.stopPropagation();
+    saveContainerState();
+    document.addEventListener("mousemove", rotation);
+    document.addEventListener("mouseup", endRotation);
+}
+
+function endRotation() {
+    event.preventDefault();
+    document.removeEventListener("mousemove", rotation);
+    document.removeEventListener("mouseup", endRotation);
+    containerAngle += angle;
+}
+
+function rotation(e) {
+    let centerX = containerState.left + containerState.width / 2;
+    let centerY = containerState.top + containerState.height / 2;
+
+    let mouseX = event.clientX + workspace.scrollLeft;
+    let mouseY = event.clientY + workspace.scrollTop;
+
+    let aX = containerState.mouseX - centerX;
+    let aY = containerState.mouseY - centerY;
+
+    let bX = mouseX - centerX;
+    let bY = mouseY - centerY;
+
+    let ab = aX * bX + aY * bY;
+    let aLen = Math.sqrt(aX * aX + aY * aY);
+    let bLen = Math.sqrt(bX * bX + bY * bY);
+
+    let angleCos = ab / (aLen * bLen);
+    angle = Math.acos(angleCos);
+    if (aX * bY - aY * bX < 0) {
+        angle *= -1;
+    }
+
+    rotateContainer(containerAngle + angle);
+}
+
+function rotateContainer(angle) {
+    containerWrapper.style.webkitTransform = "rotate(" + angle + "rad)";
+    containerWrapper.style.transform = "rotate(" + angle + "rad)";
+}
+
+function resizeContainer(width, height) {
+    let img = document.querySelector("#selectedImage");
+    img.style.width = width + "px";
+    img.style.height = height + "px";
+}
+
+function moveContainer(left, top) {
+    containerWrapper.style.left = left + "px";
+    containerWrapper.style.top = top + "px";
+}
+
+function rotateLeft() {
+    containerAngle -= Math.PI / 2;
+    rotateContainer(containerAngle);
+}
+
+function rotateRight() {
+    containerAngle += Math.PI / 2;
+    rotateContainer(containerAngle);
+}
+
+function flipContainer() {
+    let img = document.querySelector("#selectedImage");
+    img.style.webkitTransform = "scale(" + containerState.scaleX + "," + containerState.scaleY + ")";
+    img.style.transform = "scale(" + containerState.scaleX + "," + containerState.scaleY + ")";
+}
+
+function flipContainerHorizontally() {
+    containerState.scaleY *= -1;
+    flipContainer();
+}
+
+function flipContainerVertically() {
+    containerState.scaleX *= -1;
+    flipContainer();
 }
