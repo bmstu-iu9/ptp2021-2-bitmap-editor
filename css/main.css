@@ -255,7 +255,7 @@ body {
 /* Панель инструментов (слева) */
 .toolPanel {
     position: absolute;
-    top: 40px;
+    top: 0px;
     width: 60px;
     text-align: center;
 }
