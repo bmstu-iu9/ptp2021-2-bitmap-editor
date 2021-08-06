@@ -9,30 +9,39 @@ body {
     font-size: 16px;
     font-family: sans-serif;
     background: #E0E0E0;
+    cursor: default;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .form {
+    display: none;
     position: absolute;
     top: 50%;
     left: 50%;
     font-size: 14px;
     width: 200px;
     background: #F5F5F5;
-    border-radius: 10px;
+    border-radius: 8px;
     padding: 30px;
     margin: -175px 0px 0px -100px;
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    z-index: 3;
 }
 
-.disabled {
-    display: none;
+.form.active {
+    display: block;
 }
 
 .imageCreationForm form {
     height: 350px;
 }
 
-.resizeForm form {
+.imageResizeForm form,
+.canvas.resizeForm form {
     height: 260px;
 }
 
@@ -51,8 +60,10 @@ body {
 
 .form .input input[type='number'] {
     /* Поле ввода чисел */
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     height: 100%;
-    width: 97%;
+    width: 100%;
     font-size: 14px;
     margin-top: 5px;
     padding: 8px 0px 8px 5px;
@@ -61,6 +72,7 @@ body {
     outline: none;
     border-radius: 8px;
     border: 1px solid silver;
+    -webkit-transition: 0.2s;
     transition: 0.2s;
 }
 
@@ -73,6 +85,7 @@ body {
     border-radius: 8px;
     border: 1px solid silver;
     background: #fff;
+    -webkit-transition: 0.2s;
     transition: 0.2s;
 }
 
@@ -93,13 +106,12 @@ body {
     padding: 10px, 20px;
     width: 90px;
     height: 34px;
-    //border: none;
     margin-left: 5px;
     margin-right: 5px;
     border: 1px solid silver;
     outline: none;
     border-radius: 5px;
-    cursor: pointer;
+    -webkit-transition: 0.2s;
     transition: 0.2s;
     background: #fff;
 }
@@ -124,24 +136,48 @@ body {
     background: #FFCA28;
 }
 
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+}
+
 /* Рабочая область */
 
 .workspace {
     display: block;
     position: absolute;
-    overflow: hidden;
+    overflow: auto;
     top: 40px;
     left: 60px;
     bottom: 40px;
     right: 220px;
     background-color: #F5F5F5;
     border-radius: 8px;
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
-
 .topLeftCorner {
     border-top-left-radius: 0px;
+}
+
+.canvasArea {
+    position: absolute;
+    display: block;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+/* Холст */
+.canvas {
+    position: absolute;
+    display: block;
+    border: 1px solid #E0E0E0;
 }
 
 /* Меню */
@@ -149,14 +185,13 @@ body {
 .menuBar {
     position: absolute;
     margin: 0px;
-    padding-left: 60px;
+    left: 60px;
     height: 40px;
 }
 
 
 .menu {
     position: relative;
-    width: 150px;
     display: inline-block;
     margin-right: -4px;
 }
@@ -165,6 +200,7 @@ body {
     position: relative;
     padding: 11px 12px;
     text-align: center;
+    z-index: 1;
 }
 
 .menuTitle:hover {
@@ -173,10 +209,10 @@ body {
 
 .menuList {
     position: absolute;
-    width: 150px;
+    white-space: nowrap;
     padding: 1px 0px;
     background: #fff;
-    border-radius: 0px 0px 8px 8px;
+    border-radius: 0px 8px 8px 8px;
     padding: 8px 0px;
 }
 
@@ -186,11 +222,14 @@ body {
 
 .menu.active {
     border-radius: 0px 0px 8px 8px;
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
 .menu.active .menuList {
     display: block;
+    -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
 }
 
 .menu.active .menuTitle {
@@ -201,6 +240,10 @@ body {
 .menuItem {
     margin: 0px 0px;
     padding: 8px 24px;
+}
+
+.menuItem .hotkey {
+    color: gray;
 }
 
 .menuItem:hover,
@@ -224,10 +267,9 @@ body {
 }
 
 .toolButton {
-    padding: 12px;
     border: none;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background-size: cover;
     background-color: #e0e0e0;
     outline: none;
@@ -288,8 +330,14 @@ body {
     height: 16px;
 }
 
+.currentColors .button .toolButton:hover {
+    width: 18px;
+    height: 18px;
+}
+
 .rightPanel .section {
     position: relative;
+    -webkit-box-sizing: content-box;
     box-sizing: content-box;
     margin: 0px 12px 12px 12px;
     background-color: #f5f5f5;
@@ -297,8 +345,28 @@ body {
 }
 
 .rightPanel .preferences {
-    //height: 500px%;
     padding: 16px;
+}
+
+.rightPanel .insertImageButtons {
+    position: relative;
+    margin: 0px 12px 12px 12px;
+}
+
+.insertImageButtons button {
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    border: none;
+    background-size: cover;
+    background-color: #e0e0e0;
+    outline: none;
+    margin-right: 4px;
+}
+
+.insertImageButtons button:hover,
+.insertImageButtons button:active {
+    background-color: #f5f5f5;
 }
 
 /* Панель снизу */
@@ -314,3 +382,183 @@ body {
 .bottomPanel .zoom {
     padding: 12px;
 }
+
+
+/* Скроллбар */
+
+* {
+    scrollbar-color: #FFB300 transparent;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 8px;
+    background-color: #FFB300;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #FFCA28;
+}
+
+::-webkit-scrollbar-corner {
+    background: transparent;
+}
+
+
+
+/* выделение */
+
+.selectionWrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform-origin: top left;
+    transform-origin: top left;
+    cursor: move;
+}
+
+.selectionContainer {
+    position: relative;
+    display: block;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.selectionContainer img {
+    display: block;
+    outline: 2px solid #FFB300;
+}
+
+.selectionHandle {
+    position: absolute;
+    display: block;
+    width: 10px;
+    height: 10px;
+    background: #FFB300;
+    border-radius: 8px;
+}
+
+.selectionHandle.NE {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.selectionHandle.NW {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.selectionHandle.SE {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+    //background: #E65100;
+}
+
+.selectionHandle.SW {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.selectionHandle.N {
+    top: -5px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+
+.selectionHandle.E {
+    top: 50%;
+    right: -5px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+
+.selectionHandle.S {
+    bottom: -5px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+
+.selectionHandle.W {
+    top: 50%;
+    left: -5px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    cursor: w-resize;
+}
+
+.rotationHandle {
+    position: absolute;
+    display: block;
+    width: 15px;
+    height: 15px;
+    cursor: -webkit-grabbing;
+    cursor: grabbing;
+    cursor: url('../icons/rotate.png'), auto;
+}
+
+.rotationHandle.NE {
+    top: -20px;
+    right: -20px;
+}
+
+.rotationHandle.NW {
+    top: -20px;
+    left: -20px;
+}
+
+.rotationHandle.SE {
+    bottom: -20px;
+    right: -20px;
+}
+
+.rotationHandle.SW {
+    bottom: -20px;
+    left: -20px;
+}
+
+.rotationHandle.N {
+    top: -20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.rotationHandle.E {
+    top: 50%;
+    right: -20px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.rotationHandle.S {
+    bottom: -20px;
+    left: 50%;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+
+.rotationHandle.W {
+    top: 50%;
+    left: -20px;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+

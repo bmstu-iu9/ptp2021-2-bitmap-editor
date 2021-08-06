@@ -10,16 +10,35 @@
 </head>
 
 <body>
-    <div class='workspace'></div>
+    <div class='workspace'>
+        <div class='canvasArea'>
+            <canvas class='canvas' id='canvas' width='500' height='500'>Холст</canvas>
+        </div>
+    </div>
 
     <!-- Меню -->
     <div class='menuBar'>
         <div class='menu'>
             <div class='menuTitle'>Файл</div>
             <div class='menuList'>
-                <div class='menuItem' id='createImage'>Создать</div>
-                <div class='menuItem' id='openImage'>Открыть</div>
-                <div class='menuItem' id='saveImage'>Сохранить</div>
+                <div class='menuItem' id='createImage'>
+                    Создать
+                    <span class='hotkey'>Alt+N</span>
+                </div>
+                <label class='menuItem' id='openImage' style='display: block'>
+                    Открыть
+                    <span class='hotkey'>Alt+O</span>
+                    <input type='file' accept='image/jpeg, image/png, image/bmp' name='openImage' hidden>
+                </label>
+                <label class='menuItem' id='insertImage' style='display: block'>
+                    Поместить изображение
+                    <span class='hotkey'>Alt+P</span>
+                    <input type='file' accept='image/jpeg, image/png, image/bmp' name='insertImage' hidden>
+                </label>
+                <div class='menuItem' id='saveImage'>
+                    Сохранить
+                    <span class='hotkey'>Alt+S</span>
+                </div>
             </div>
         </div>
         <div class='menu'>
@@ -36,8 +55,14 @@
         <div class='menu'>
             <div class='menuTitle'>Изображение</div>
             <div class='menuList'>
-                <div class='menuItem' id='imageSize'>Размер изображения</div>
-                <div class='menuItem' id='canvasSize'>Размер полотна</div>
+                <div class='menuItem' id='resizeImage'>
+                    Размер изображения
+                    <span class='hotkey'>Alt+T</span>
+                </div>
+                <div class='menuItem' id='resizeCanvas'>
+                    Размер полотна
+                    <span class='hotkey'>Alt+Y</span>
+                </div>
             </div>
         </div>
         <div class='menu'>
@@ -49,8 +74,8 @@
             </div>
         </div>
     </div>
-    
-<!-- Панель инструментов (слева) -->
+
+    <!-- Панель инструментов (слева) -->
     <div class='toolPanel'>
         <div class="iconAngle">
             <img src="icons/left-panel-tools/magic-wand.png" width="35" height="40">
@@ -89,11 +114,11 @@
             <button type='button' name='pipetteTool' title='Пипетка' class='toolButton' style='background-image: url(icons/left-panel-tools/pipette.svg)'></button>
         </div>
     </div>
-    
+
     <!-- Панель инструментов (справа) -->
     <div class='rightPanel'>
-      
-       <!-- Палитра -->
+
+        <!-- Палитра -->
         <div class='palette'>
             <div class='currentColors'>
                 <input type='color' name='mainColor' value='#000000' title='Основной цвет' class='colorPicker active'>
@@ -102,95 +127,112 @@
                     <button type='button' name='swapColors' title='Поменять цвета местами' class='toolButton' style='background-image: url(icons/right-panel-tools/swap.svg)'></button>
                     <button type='button' name='blackWhite' title='Черный и белый' class='toolButton' style='background-image: url(icons/right-panel-tools/black-and-white.svg)'></button>
                 </div>
-                
+
             </div>
             <div class='savedColors'>
-            <!-- -->
+                <!-- -->
             </div>
         </div>
-        
+
+        <div class='insertImageButtons' hidden>
+            <button type='button' name='flipHorizontally' title='Перевернуть горизонтально' style='background-image: url(icons/right-panel-tools/flipH.svg)'></button>
+            <button type='button' name='flipVertically' title='Перевернуть вертикально' style='background-image: url(icons/right-panel-tools/flipV.svg)'></button>
+            <button type='button' name='rotateLeft' title='Повернуть против часовой стрелки на 90' style='background-image: url(icons/right-panel-tools/rotateL.svg)'></button>
+            <button type='button' name='rotateRight' title='Повернуть по часовой стрелке на 90' style='background-image: url(icons/right-panel-tools/rotateR.svg)'></button>
+            <button type='button' name='cancelImageInsertion' title='Отмена (Esc)' style='background-image: url(icons/right-panel-tools/cancel.svg)'></button>
+            <button type='button' name='insertImage' title='Готово (Enter)' style='background-image: url(icons/right-panel-tools/ok.svg)'></button>
+        </div>
+
         <!-- Свойства инструмента -->
         <div class='section preferences'></div>
     </div>
-       
+
     <!-- Панель снизу -->
     <div class='bottomPanel'>
         <div class='zoom'>
             <input type='range' name='zoom' min='0' max='500' value='100'>
         </div>
     </div>
-    
-    
+
     <!-- Форма для создания нового изображения -->
-    <div class='form imageCreationForm disabled'>
-        <form autocomplete='on'>
+    <div class='form imageCreationForm'>
+        <form>
             <div class='formTitle'><b>Новое Изображение</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
-                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+                <input type='number' name='width' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Высота, пикс.</label>
-                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+                <input type='number' name='height' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Цвет фона</label>
-                <input type='color' name='canvasColor' value='#ffffff'>
+                <input type='color' name='canvasColor' value='#ffffff' onclick='formColorInputClick()'>
             </div>
             <div class='input'>
-                <label><input type='checkbox' name='transparent' value='true'>Прозрачный</label>
+                <label><input type='checkbox' name='canvasIsTransparent' value='true' onclick='formCheckboxClick()'>Прозрачный</label>
             </div>
             <div class='button' style="float:left">
-                <button type='button'>Отмена</button>
+                <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
-                <button type='button'>Создать</button>
+                <button type='button' name='createImage'>Создать</button>
             </div>
         </form>
     </div>
 
+    <div class='overlay' hidden></div>
+
     <!-- Форма для изменения размера изображения -->
-    <div class='form resizeForm disabled'>
-        <form autocomplete='on'>
+    <div class='form imageResizeForm'>
+        <form>
             <div class='formTitle'><b>Изменить Размер Изображения</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
-                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+                <input type='number' name='width' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Высота, пикс.</label>
-                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+                <input type='number' name='height' min='0' value='500' placeholder='0'>
+            </div>
+            <div class='input'>
+                <label><input type='checkbox' name='percent' value='true' onclick='formCheckboxClick()'>Процент</label>
+                <input type='number' name='height' min='0' value='100' max='2000' placeholder='0' disabled>
             </div>
             <div class='button' style="float:left">
-                <button type='button'>Отмена</button>
+                <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
-                <button type='button'>Ок</button>
+                <button type='button' name='resizeImage'>Ок</button>
             </div>
         </form>
     </div>
 
     <!-- Форма для изменения размера полотна -->
-    <div class='form resizeForm disabled'>
-        <form autocomplete='on'>
+    <div class='form canvasResizeForm'>
+        <form>
             <div class='formTitle'><b>Изменить Размер Полотна</b></div>
             <div class='input'>
                 <label>Ширина, пикс.</label>
-                <input type='number' name='width' min='0' value='500' placeholder='0' required>
+                <input type='number' name='width' min='0' value='500' placeholder='0'>
             </div>
             <div class='input'>
                 <label>Высота, пикс.</label>
-                <input type='number' name='height' min='0' value='500' placeholder='0' required>
+                <input type='number' name='height' min='0' value='500' placeholder='0'>
+            </div>
+            <div class='input'>
+                <label><input type='checkbox' name='percent' value='true' onclick='formCheckboxClick()'>Процент</label>
+                <input type='number' name='height' min='0' value='100' max='2000' placeholder='0' disabled>
             </div>
             <div class='button' style="float:left">
-                <button type='button'>Отмена</button>
+                <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
-                <button type='button'>Ок</button>
+                <button type='button' name='resizeCanvas'>Ок</button>
             </div>
         </form>
     </div>
 
-</body>
-
-</html>
+    <script src='js/script.js'></script>
+</body></html>
