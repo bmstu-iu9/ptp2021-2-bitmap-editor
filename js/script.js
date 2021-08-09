@@ -1,7 +1,9 @@
 "use strict";
 
 let menuBar = document.querySelector(".menuBar");
-let menuBtn = document.querySelector(".menu");
+let firstMenuBtn = document.querySelector(".menu");
+let toolPanel = document.querySelector(".toolPanel");
+let firstToolBtn = toolPanel.querySelector(".button");
 let canvas = document.querySelector("#canvas");
 let context = canvas.getContext("2d");
 
@@ -27,16 +29,30 @@ window.addEventListener("load", () => {
     document.querySelector("button[name=flipVertically]").addEventListener("click", flipContainerVertically);
     document.querySelector("button[name=rotateLeft]").addEventListener("click", rotateLeft);
     document.querySelector("button[name=rotateRight]").addEventListener("click", rotateRight);
+
+    firstToolBtn.classList.add("active");
+    firstToolBtn.onmouseover = addWorkspaceCorner;
+    firstMenuBtn.onmouseover = addWorkspaceCorner;
+    firstToolBtn.onmouseout = function () {
+        if (!firstToolBtn.classList.contains("active")) {
+            removeWorkspaceCorner();
+        }
+    }
+    firstMenuBtn.onmouseout = function () {
+        if (!firstToolBtn.classList.contains("active")) {
+            removeWorkspaceCorner();
+        }
+    }
 })
 
-/* Убираем зазор между рабочей областью и вкладкой меню "Файл", когда наводим на нее */
-menuBtn.addEventListener("mouseover", () => {
-    document.querySelector(".workspace").classList.add("topLeftCorner");
-})
+function addWorkspaceCorner() {
+    workspace.classList.add("topLeftCorner");
+}
 
-menuBtn.addEventListener("mouseout", () => {
-    document.querySelector(".workspace").classList.remove("topLeftCorner");
-})
+function removeWorkspaceCorner() {
+    workspace.classList.remove("topLeftCorner");
+}
+
 
 /* Меню */
 
@@ -451,11 +467,13 @@ function initImageSelection(image) {
 function removeDocumentEvents() {
     document.removeEventListener("keydown", hotkeyPress);
     menuBar.removeEventListener("mousedown", menuBarClick);
+    toolPanel.removeEventListener("mousedown", toolPanelClick);
 }
 
 function returnDocumentEvents() {
     document.addEventListener("keydown", hotkeyPress);
     menuBar.addEventListener("mousedown", menuBarClick);
+    toolPanel.addEventListener("mousedown", toolPanelClick);
 }
 
 function insertImage() {
@@ -583,7 +601,7 @@ function resizing() {
         }
     }
 
-   if (event.shiftKey) {
+    if (event.shiftKey) {
         if (handleClassList.contains("right") || handleClassList.contains("left")) {
             height = width * containerState.img.height / containerState.img.width;
             if (handleClassList.contains("top")) {
@@ -721,4 +739,37 @@ function flipContainerHorizontally() {
 function flipContainerVertically() {
     containerState.scaleX *= -1;
     flipContainer();
+}
+
+
+/* панель инструментов */
+toolPanel.addEventListener("mousedown", toolPanelClick);
+
+function toolPanelClick() {
+    let target = event.target;
+    let toolButton = target.closest(".button");
+    let activeTool = document.querySelector(".button.active");
+
+    if (toolButton != null && toolButton != activeTool) {
+        toggleToolButton(activeTool)
+        toolButtonClick();
+        if (activeTool == firstToolBtn) {
+            removeWorkspaceCorner();
+        }
+    }
+}
+
+function toolButtonClick() {
+    let button = event.target;
+    toggleToolButton(button);
+
+    if (button.closest(".button") == firstToolBtn) {
+        addWorkspaceCorner();
+    }
+
+    switch (button.name) {}
+}
+
+function toggleToolButton(button) {
+    button.closest(".button").classList.toggle("active");
 }
