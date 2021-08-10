@@ -1,8 +1,8 @@
-"use strict";
+//"use strict";
 
 
-let canvas = document.querySelector("#canvas");
-let context = canvas.getContext("2d");
+//let canvas = document.querySelector("#canvas");
+//let context = canvas.getContext("2d");
 
 function pencilClick() {
 
@@ -17,7 +17,7 @@ function pencilClick() {
       var xdif = event.movementX;
       var ydif = event.movementY;
  
-      if (event.button >= 0) {
+      if (event.buttons > 0) {
         context.beginPath();
         context.moveTo(x, y);
         context.lineTo(x - xdif, y - ydif);
