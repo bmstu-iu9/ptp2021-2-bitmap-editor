@@ -766,7 +766,7 @@ function toolButtonClick() {
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
-
+    
     switch (button.name) {
         case "toolPencil": pencilClick();
         break;  
