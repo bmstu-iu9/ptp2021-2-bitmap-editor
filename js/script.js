@@ -768,7 +768,7 @@ function toolButtonClick() {
     }
     
     switch (button.name) {
-        case "toolPencil": pencilClick();
+        case "pencilTool": pencilClick();
         break;  
         // для других инструментов добавьте свои case и функции 
     }
