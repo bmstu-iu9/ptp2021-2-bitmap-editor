@@ -760,13 +760,13 @@ function toolPanelClick() {
 }
 
 function toolButtonClick() {
-    let button = event.target;
+    let button = event.target.closest(".toolButton");
     toggleToolButton(button);
 
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
-
+    
     switch (button.name) {
         case "toolPencil": pencilClick();
         break;  
