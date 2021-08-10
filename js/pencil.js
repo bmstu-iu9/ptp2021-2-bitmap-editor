@@ -1,8 +1,7 @@
 //"use strict";
 
-
 //let canvas = document.querySelector("#canvas");
-//let context = canvas.getContext("2d");
+//let context = canvas.getContext("2d"); <- уже объявлено в script.js
 
 function pencilClick() {
 

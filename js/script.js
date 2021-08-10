@@ -759,7 +759,7 @@ function toolPanelClick() {
     }
 }
 
-/*function toolButtonClick() { 
+function toolButtonClick() {
     let button = event.target;
     toggleToolButton(button);
 
@@ -768,12 +768,11 @@ function toolPanelClick() {
     }
 
     switch (button.name) {
-            case "pencilTool" {
-                pencilClick()
-            }
-            // для других инструментов добавьте свои case и функции 
+        case "toolPencil": pencilClick();
+        break;  
+        // для других инструментов добавьте свои case и функции 
     }
-}*/
+}
 
 function toggleToolButton(button) {
     button.closest(".button").classList.toggle("active");
