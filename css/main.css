@@ -9,11 +9,11 @@ body {
     font-size: 16px;
     font-family: sans-serif;
     background: #E0E0E0;
-    cursor: default;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: default;
 }
 
 .form {
@@ -160,6 +160,7 @@ body {
     border-radius: 8px;
     -webkit-box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.1);
+
 }
 
 .topLeftCorner {
@@ -178,6 +179,7 @@ body {
     position: absolute;
     display: block;
     border: 1px solid #E0E0E0;
+
 }
 
 /* Меню */
@@ -273,7 +275,7 @@ body {
     width: 24px;
     height: 24px;
     background-size: cover;
-    background-color: #e0e0e0;
+    background-color: transparent;
     outline: none;
     cursor: pointer;
 }
@@ -281,11 +283,6 @@ body {
 .toolPanel .button:hover,
 .toolPanel .button.active {
     background: #f5f5f5;
-}
-
-.toolPanel .button:hover .toolButton,
-.toolPanel .button.active .toolButton {
-    background-color: #f5f5f5;
 }
 
 /*анимация кнопок левой панели*/
@@ -312,6 +309,7 @@ body {
     opacity: 1;
     transition-delay: .1s;
 }
+
 /* Панель инструментов справа */
 
 .rightPanel {
