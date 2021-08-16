@@ -760,14 +760,18 @@ function toolPanelClick() {
 }
 
 function toolButtonClick() {
-    let button = event.target;
+    let button = event.target.closest(".toolButton");
     toggleToolButton(button);
 
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
-
-    switch (button.name) {}
+    
+    switch (button.name) {
+        case "pencilTool": pencilClick();
+        break;  
+        // для других инструментов добавьте свои case и функции 
+    }
 }
 
 function toggleToolButton(button) {
