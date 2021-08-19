@@ -147,8 +147,8 @@
         <div class='section preferences'>Свойства инструмента
             <h5 align="center">Толщина</h5>
             <div class='thickness'>
-                <input type="range" name="brushsize" min="0" max="20" id="brushSlider" step="1" value="1" onchange="this.setAttribute('value',this.value);" class='slider'>
-                <input type="text" class="polzunok-input">
+                <div class="rangeNum"></div>
+                <input type="range" name="brushsize" min="0" max="30" id="brushSlider" step="1" value="0" class='slider' onchange="changeLineWidth(this.value);">
             </div>
             <!--следующие под вопросом-->
             <h6 align="center">Жесткость</h6>
@@ -248,7 +248,6 @@
 
     <script src='js/script.js'></script>
     <script src='js/pencil.js'></script>
-
 </body>
 
 </html>
