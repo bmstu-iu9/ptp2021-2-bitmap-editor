@@ -586,3 +586,53 @@ body {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
+
+
+/*Свойства инструментов в правой панели*/
+.thickness {
+    width: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.slider {
+    -webkit-appearance: none;
+    width: 90%;
+    height: 15px;
+    border-radius: 20px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+
+}
+
+.slider:hover {
+    opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #FFB300;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.slider::-webkit-slider-thumb:hover {
+    background-color: #FFCA28;
+}
+
+.polzunok-input {
+    height: 5px;
+    border: 1px solid;
+    text-align: center;
+    font-size: 10px;
+    padding: 8px;
+    width: 10%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.2);
+}
