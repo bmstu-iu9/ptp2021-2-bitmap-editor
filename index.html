@@ -144,7 +144,19 @@
         </div>
 
         <!-- Свойства инструмента -->
-        <div class='section preferences'></div>
+        <div class='section preferences'>Свойства инструмента
+            <h5 align="center">Толщина</h5>
+            <div class='thickness'>
+                <div class="rangeNum"></div>
+                <input type="range" name="brushsize" min="0" max="30" id="brushSlider" step="1" value="0" class='slider' onchange="changeLineWidth(this.value);">
+            </div>
+            <!--следующие под вопросом-->
+            <h6 align="center">Жесткость</h6>
+            <h6 align="center">Стиль</h6>
+            <h6 align="center">Тип фигуры</h6>
+            <h6 align="center">Стиль заливки</h6>
+        </div>
+
     </div>
 
     <!-- Панель снизу -->
@@ -233,7 +245,6 @@
             </div>
         </form>
     </div>
-
 
     <script src='js/script.js'></script>
     <script src='js/pencil.js'></script>

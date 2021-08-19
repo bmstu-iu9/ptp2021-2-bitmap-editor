@@ -779,3 +779,15 @@ function toolButtonClick() {
 function toggleToolButton(button) {
     button.closest(".button").classList.toggle("active");
 }
+
+/*изменение толщины*/
+function changeLineWidth(brushSize){
+   context.lineWidth = brushSize;
+}
+/*ползунок*/
+let range = document.querySelector(".slider");
+let rangeNums = document.querySelector(".rangeNum");
+range.oninput = function () {
+    rangeNums.style.left = this.value*1.5 - 10 + "px";
+    rangeNums.innerHTML = this.value;
+}
