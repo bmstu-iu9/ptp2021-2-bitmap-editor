@@ -784,7 +784,7 @@ function toolButtonClick() {
             /*функционал*/
             break;
         case "eraserTool":
-            /*функционал*/
+            eraserClick();
             break;
         case "figuresTool":
             /*функционал*/
@@ -808,14 +808,18 @@ function toggleToolButton(button) {
     button.closest(".button").classList.toggle("active");
 }
 
-/*изменение толщины*/
+/* изменение толщины */
 function changeLineWidth(brushSize) {
     context.lineWidth = brushSize;
 }
-/*ползунок*/
+
 let range = document.querySelector(".slider");
 let rangeNums = document.querySelector(".rangeNum");
 range.oninput = function () {
     rangeNums.style.left = this.value * 5 + "px";
     rangeNums.innerHTML = this.value;
 }
+/* очистка изображения */
+document.getElementById("clean").onclick = function clear() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+};
