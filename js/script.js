@@ -766,11 +766,41 @@ function toolButtonClick() {
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
-    
+
     switch (button.name) {
-        case "pencilTool": pencilClick();
-        break;  
-        // для других инструментов добавьте свои case и функции 
+        case "moveTool":
+            /*функционал*/
+            break;
+        case "handTool":
+            /*функционал*/
+            break;
+        case "selectTool":
+            /*функционал*/
+            break;
+        case "pencilTool":
+            pencilClick();
+            break;
+        case "brushTool":
+            /*функционал*/
+            break;
+        case "eraserTool":
+            /*функционал*/
+            break;
+        case "figuresTool":
+            /*функционал*/
+            break;
+        case "lineTool":
+            /*функционал*/
+            break;
+        case "bucketTool":
+            /*функционал*/
+            break;
+        case "textTool":
+            /*функционал*/
+            break;
+        case "pipetteTool":
+            /*функционал*/
+            break;
     }
 }
 
@@ -779,13 +809,13 @@ function toggleToolButton(button) {
 }
 
 /*изменение толщины*/
-function changeLineWidth(brushSize){
-   context.lineWidth = brushSize;
+function changeLineWidth(brushSize) {
+    context.lineWidth = brushSize;
 }
 /*ползунок*/
 let range = document.querySelector(".slider");
 let rangeNums = document.querySelector(".rangeNum");
 range.oninput = function () {
-    rangeNums.style.left = this.value*1.5 - 10 + "px";
+    rangeNums.style.left = this.value * 5 + "px";
     rangeNums.innerHTML = this.value;
 }
