@@ -766,7 +766,7 @@ function toolButtonClick() {
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
-
+    canvas.onmousemove = function() {}
     switch (button.name) {
         case "moveTool":
             /*функционал*/
@@ -784,13 +784,13 @@ function toolButtonClick() {
             /*функционал*/
             break;
         case "eraserTool":
-            eraserClick();
+            //eraserClick();
             break;
         case "figuresTool":
             /*функционал*/
             break;
         case "lineTool":
-            /*функционал*/
+            lineClick();
             break;
         case "bucketTool":
             /*функционал*/
