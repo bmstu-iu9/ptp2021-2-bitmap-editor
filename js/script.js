@@ -772,7 +772,11 @@ function toolButtonClick() {
         case "pencilTool":
             pencilClick();
             break;
-            // для других инструментов добавьте свои case и функции
+
+        case "lineTool":
+            lineClick();
+            break;
+        // для других инструментов добавьте свои case и функции
     }
 }
 
