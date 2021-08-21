@@ -760,12 +760,13 @@ function toolPanelClick() {
 }
 
 function toolButtonClick() {
-    let button = event.target.closest(".toolButton");
+    let button = event.target;
     toggleToolButton(button);
 
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
+
     canvas.onmousemove = function() {}
     switch (button.name) {
         case "moveTool":
