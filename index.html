@@ -151,7 +151,6 @@
                 <input type="range" name="brushsize" min="0" max="30" id="brushSlider" step="1" value="0" class='slider' onchange="changeLineWidth(this.value);">
             </div>
             <!--следующие под вопросом-->
-            <h6 align="center">Жесткость</h6>
             <h6 align="center">Стиль</h6>
             <h6 align="center">Тип фигуры</h6>
             <h6 align="center">Стиль заливки</h6>
@@ -161,8 +160,13 @@
 
     <!-- Панель снизу -->
     <div class='bottomPanel'>
-        <div class='zoom'>
-            <input type='range' name='zoom' min='0' max='500' value='100'>
+        <div class='bottomMenu'>
+            <button type='button' id='clean' class="clear">Очистить холст</button>
+        </div>
+        <div class='bottomMenu'>
+            <div class='zoom'>
+                <input type='range' name='zoom' min='0' max='500' value='100'>
+            </div>
         </div>
     </div>
 

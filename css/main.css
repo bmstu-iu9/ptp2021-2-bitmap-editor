@@ -398,7 +398,7 @@ body {
 
 .bottomPanel {
     position: absolute;
-    bottom: 0px;
+    bottom: 2px;
     height: 40px;
     right: 220px;
     overflow: hidden;
@@ -406,8 +406,28 @@ body {
 
 .bottomPanel .zoom {
     padding: 12px;
+    position: relative;
 }
 
+.bottomMenu {
+    position: relative;
+    margin-right: 15px;
+    display: inline-block;
+}
+
+.clear {
+    position: relative;
+    padding: 5px 10px 5px 10px;
+    text-align: center;
+    left: 10px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.clear:hover {
+    background: #F5F5F5;
+}
 
 /* Скроллбар */
 
@@ -641,4 +661,3 @@ body {
 .slider::-webkit-slider-thumb:hover {
     background-color: #FFCA28;
 }
-

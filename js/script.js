@@ -767,16 +767,41 @@ function toolButtonClick() {
         addWorkspaceCorner();
     }
 
-    button = button.firstChild || button;
+    canvas.onmousemove = function() {}
     switch (button.name) {
+        case "moveTool":
+            /*функционал*/
+            break;
+        case "handTool":
+            /*функционал*/
+            break;
+        case "selectTool":
+            /*функционал*/
+            break;
         case "pencilTool":
             pencilClick();
             break;
-
+        case "brushTool":
+            /*функционал*/
+            break;
+        case "eraserTool":
+            //eraserClick();
+            break;
+        case "figuresTool":
+            /*функционал*/
+            break;
         case "lineTool":
             lineClick();
             break;
-        // для других инструментов добавьте свои case и функции
+        case "bucketTool":
+            /*функционал*/
+            break;
+        case "textTool":
+            /*функционал*/
+            break;
+        case "pipetteTool":
+            /*функционал*/
+            break;
     }
 }
 
@@ -784,14 +809,18 @@ function toggleToolButton(button) {
     button.closest(".button").classList.toggle("active");
 }
 
-/*изменение толщины*/
-function changeLineWidth(brushSize){
-   context.lineWidth = brushSize;
+/* изменение толщины */
+function changeLineWidth(brushSize) {
+    context.lineWidth = brushSize;
 }
-/*ползунок*/
+
 let range = document.querySelector(".slider");
 let rangeNums = document.querySelector(".rangeNum");
 range.oninput = function () {
-    rangeNums.style.left = this.value*1.5 - 10 + "px";
+    rangeNums.style.left = this.value * 5 + "px";
     rangeNums.innerHTML = this.value;
 }
+/* очистка изображения */
+document.getElementById("clean").onclick = function clear() {
+    context.clearRect(0, 0, canvas.width, canvas.height);
+};
