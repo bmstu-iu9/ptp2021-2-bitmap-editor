@@ -1,6 +1,5 @@
 function lineClick() {
   context.lineCap = "round";
-  context.lineWidth = 2;
 
   var starter_x;
   var starter_y;

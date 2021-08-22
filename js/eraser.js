@@ -1,11 +1,11 @@
-function pencilClick() {
+function eraserClick() {
+
     var mouseIsDown = false;
     context.lineCap = "round";
 
     canvas.onmousedown = function (event) {
 
-        canvas.onmousemove = function drawing(event) {
-            // в "event"  попадает экземпляр MouseEvent
+        canvas.onmousemove = function cleaning(event) {
             var x = event.offsetX;
             var y = event.offsetY;
             var xdif = event.movementX;
@@ -13,9 +13,14 @@ function pencilClick() {
 
             if (event.buttons > 0) {
                 context.beginPath();
+                context.globalCompositeOperation = "destination-out";
+
                 context.moveTo(x, y);
                 context.lineTo(x - xdif, y - ydif);
+                context.strokeStyle = "rgba(255,255,255,1)";
+                context.fillStyle = "rgba(255,255,255,1)";
                 context.stroke();
+                context.globalCompositeOperation = "source-over"; // возвращаем по-умолчанию
                 context.closePath();
             }
         }
@@ -27,5 +32,4 @@ function pencilClick() {
 
         mouseIsDown = false;
     }
-
 }
