@@ -14,8 +14,14 @@ function pencilClick() {
                 context.beginPath();
                 context.moveTo(x, y);
                 context.lineTo(x - xdif, y - ydif);
-                context.strokeStyle = currentColor;
-                context.fillStyle = currentColor;
+                if (event.which == 1) {
+                    context.strokeStyle = currentColor;
+                    context.fillStyle = currentColor;
+                }
+                if (event.which == 3) {
+                    context.strokeStyle = currentColor2;
+                    context.fillStyle = currentColor2;
+                }
                 context.stroke();
                 context.closePath();
             }

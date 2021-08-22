@@ -767,10 +767,10 @@ function toolButtonClick() {
         addWorkspaceCorner();
     }
     /* обнуление */
-    canvas.onmousemove = function() {}
-    canvas.onmousedown = function() {}
-    canvas.onmouseup = function() {}
-    
+    canvas.onmousemove = function () {}
+    canvas.onmousedown = function () {}
+    canvas.onmouseup = function () {}
+
     switch (button.name) {
         case "moveTool":
             /*функционал*/
@@ -830,6 +830,13 @@ document.getElementById("clean").onclick = function clear() {
 
 /* рисование основным и доп цветом */
 var currentColor = 'black'
-document.querySelector(".colorPicker").oninput = function() {
+var currentColor2 = 'white'
+
+
+document.querySelector("input[name=mainColor]").oninput = function () {
     currentColor = this.value;
+}
+
+document.querySelector("input[name=additionalColor]").oninput = function () {
+    currentColor2 = this.value;
 }

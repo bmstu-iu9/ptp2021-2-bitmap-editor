@@ -14,10 +14,16 @@ function lineClick() {
         context.beginPath();
         context.moveTo(starter_x, starter_y);
         context.lineTo(event.offsetX, event.offsetY);
-        context.strokeStyle = currentColor;
-        context.fillStyle = currentColor;
+        if (event.which == 1) {
+            context.strokeStyle = currentColor;
+            context.fillStyle = currentColor;
+        }
+        if (event.which == 3) {
+            context.strokeStyle = currentColor2;
+            context.fillStyle = currentColor2;
+        }
         context.stroke();
         context.closePath();
     };
-    
+
 }
