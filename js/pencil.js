@@ -1,6 +1,9 @@
 function pencilClick() {
     var mouseIsDown = false;
     context.lineCap = "round";
+    //сделать фцнкцию для currentColor
+    context.strokeStyle = "rgba(0,0,0,1)";
+    context.fillStyle = "rgba(0,0,0,1)";
 
     canvas.onmousedown = function (event) {
 

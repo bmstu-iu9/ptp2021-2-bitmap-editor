@@ -3,8 +3,12 @@ function eraserClick() {
     var mouseIsDown = false;
     context.lineCap = "round";
 
-    canvas.onmousedown = function (event) {
+    context.globalCompositeOperation = "destination-out";
+    context.strokeStyle = "rgba(245,245,245,1)";
+    context.fillStyle = "rgba(245,245,245,1)";
 
+    canvas.onmousedown = function (event) {
+        mouseIsDown = true;
         canvas.onmousemove = function cleaning(event) {
             var x = event.offsetX;
             var y = event.offsetY;
@@ -13,22 +17,17 @@ function eraserClick() {
 
             if (event.buttons > 0) {
                 context.beginPath();
-                context.globalCompositeOperation = "destination-out";
-
                 context.moveTo(x, y);
                 context.lineTo(x - xdif, y - ydif);
-                context.strokeStyle = "rgba(255,255,255,1)";
-                context.fillStyle = "rgba(255,255,255,1)";
                 context.stroke();
-                context.globalCompositeOperation = "source-over"; // возвращаем по-умолчанию
                 context.closePath();
             }
         }
+        context.globalCompositeOperation = "source-over"; // возвращаем по-умолчанию
 
-        mouseIsDown = true;
     }
     canvas.onmouseup = function (e) {
-        if (mouseIsDown) pencilClick(e);
+        if (mouseIsDown) eraserClick(e);
 
         mouseIsDown = false;
     }
