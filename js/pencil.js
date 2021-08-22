@@ -1,9 +1,5 @@
 function pencilClick() {
-    var mouseIsDown = false;
     context.lineCap = "round";
-    //сделать фцнкцию для currentColor
-    context.strokeStyle = "rgba(0,0,0,1)";
-    context.fillStyle = "rgba(0,0,0,1)";
 
     canvas.onmousedown = function (event) {
 
@@ -18,17 +14,15 @@ function pencilClick() {
                 context.beginPath();
                 context.moveTo(x, y);
                 context.lineTo(x - xdif, y - ydif);
+                context.strokeStyle = currentColor;
+                context.fillStyle = currentColor;
                 context.stroke();
                 context.closePath();
             }
         }
-
-        mouseIsDown = true;
-    }
-    canvas.onmouseup = function (e) {
-        if (mouseIsDown) pencilClick(e);
-
-        mouseIsDown = false;
     }
 
+    canvas.onmouseup = function () {
+        canvas.onmousemove = null;
+    }
 }

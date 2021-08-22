@@ -827,3 +827,9 @@ range.oninput = function () {
 document.getElementById("clean").onclick = function clear() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 };
+
+/* рисование основным и доп цветом */
+var currentColor = 'black'
+document.querySelector(".colorPicker").oninput = function() {
+    currentColor = this.value;
+}
