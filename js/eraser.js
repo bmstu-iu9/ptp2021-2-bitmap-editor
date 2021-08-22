@@ -1,14 +1,11 @@
 function eraserClick() {
-
-    var mouseIsDown = false;
     context.lineCap = "round";
-
     context.globalCompositeOperation = "destination-out";
-    context.strokeStyle = "rgba(245,245,245,1)";
-    context.fillStyle = "rgba(245,245,245,1)";
+    var eraserColor = "rgba(245,245,245,1)"
+    context.strokeStyle = eraserColor;
+    context.fillStyle = eraserColor;
 
     canvas.onmousedown = function (event) {
-        mouseIsDown = true;
         canvas.onmousemove = function cleaning(event) {
             var x = event.offsetX;
             var y = event.offsetY;
@@ -24,11 +21,10 @@ function eraserClick() {
             }
         }
         context.globalCompositeOperation = "source-over"; // возвращаем по-умолчанию
-
     }
-    canvas.onmouseup = function (e) {
-        if (mouseIsDown) eraserClick(e);
-
-        mouseIsDown = false;
+    
+    canvas.onmouseup = function() {
+        canvas.onmousemove = null;
     }
+    
 }
