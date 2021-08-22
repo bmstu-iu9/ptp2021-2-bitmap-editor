@@ -25,5 +25,4 @@ function lineClick() {
         context.stroke();
         context.closePath();
     };
-
 }
