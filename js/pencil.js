@@ -1,6 +1,6 @@
 function pencilClick() {
     var mouseIsDown = false;
-
+    context.lineCap = "round";
     canvas.onmousedown = function (event) {
 
         canvas.onmousemove = function drawing(event) {
