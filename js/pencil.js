@@ -1,5 +1,4 @@
 function pencilClick() {
-    var mouseIsDown = false;
     context.lineCap = "round";
 
     canvas.onmousedown = function (event) {
@@ -15,17 +14,21 @@ function pencilClick() {
                 context.beginPath();
                 context.moveTo(x, y);
                 context.lineTo(x - xdif, y - ydif);
+                if (event.which == 1) {
+                    context.strokeStyle = currentColor;
+                    context.fillStyle = currentColor;
+                }
+                if (event.which == 3) {
+                    context.strokeStyle = currentColor2;
+                    context.fillStyle = currentColor2;
+                }
                 context.stroke();
                 context.closePath();
             }
         }
-
-        mouseIsDown = true;
-    }
-    canvas.onmouseup = function (e) {
-        if (mouseIsDown) pencilClick(e);
-
-        mouseIsDown = false;
     }
 
+    canvas.onmouseup = function () {
+        canvas.onmousemove = null;
+    }
 }

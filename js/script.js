@@ -767,10 +767,10 @@ function toolButtonClick() {
         addWorkspaceCorner();
     }
     /* обнуление */
-    canvas.onmousemove = function() {}
-    canvas.onmousedown = function() {}
-    canvas.onmouseup = function() {}
-    
+    canvas.onmousemove = function () {}
+    canvas.onmousedown = function () {}
+    canvas.onmouseup = function () {}
+
     switch (button.name) {
         case "moveTool":
             /*функционал*/
@@ -827,3 +827,38 @@ range.oninput = function () {
 document.getElementById("clean").onclick = function clear() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 };
+
+/* рисование основным и доп цветом */
+var currentColor = '#000000';
+var currentColor2 = '#ffffff';
+
+document.querySelector("input[name=mainColor]").oninput = function () {
+    currentColor = this.value;
+}
+
+document.querySelector("input[name=additionalColor]").oninput = function () {
+    currentColor2 = this.value;
+}
+
+/* поменять цвета местами и ч/б */
+
+document.querySelector("button[name=swapColors]").addEventListener("click", swapMainAndAdditionalColors);
+
+function swapMainAndAdditionalColors() {
+    document.querySelector("input[name=mainColor]").value = currentColor2;
+    document.querySelector("input[name=additionalColor]").value = currentColor;
+
+    var c = currentColor;
+    currentColor = currentColor2;
+    currentColor2 = c;
+}
+
+document.querySelector("button[name=blackWhite]").addEventListener("click", makeBlackAndWhite);
+
+function makeBlackAndWhite() {
+    currentColor = '#000000';
+    currentColor2 = '#ffffff'
+    document.querySelector("input[name=mainColor]").value = currentColor;
+    document.querySelector("input[name=additionalColor]").value = currentColor2;
+
+}
