@@ -375,6 +375,28 @@ function hotkeyPress() {
                 break;
         }
     }
+    if (event.ctrlKey) {
+        switch (event.key) {
+            case "z":
+                undoLast();
+                break;
+            case "r":
+               
+                break;
+            case "x":
+                
+                break;
+            case "c":
+                
+                break;
+            case "v":
+                
+                break;
+            case "d":
+                
+                break;   
+        }
+    }
 }
 
 /* Поместить изображение на холст */
