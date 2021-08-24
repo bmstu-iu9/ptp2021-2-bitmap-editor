@@ -172,7 +172,7 @@ body {
     display: block;
     min-width: 100%;
     min-height: 100%;
-    cursor: url('../icons/pencil.png'), auto;
+    cursor: url('../icons/cursor.png'), auto;
 }
 
 /* Холст */
