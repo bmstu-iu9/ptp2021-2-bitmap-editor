@@ -233,7 +233,7 @@ function buttonClick() {
     }
 }
 
-/* взаимодействие с холстом */
+/* Взаимодействие с холстом */
 
 function setCanvasValues(width, height, bgcolor = backgroundColor) {
     canvasWidth = width;
@@ -742,7 +742,7 @@ function flipContainerVertically() {
 }
 
 
-/* панель инструментов */
+/* Панель инструментов */
 toolPanel.addEventListener("mousedown", toolPanelClick);
 
 function toolPanelClick() {
@@ -766,7 +766,7 @@ function toolButtonClick() {
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
-    /* обнуление */
+    /* Обнуление */
     canvas.onmousemove = function () {}
     canvas.onmousedown = function () {}
     canvas.onmouseup = function () {}
@@ -812,7 +812,7 @@ function toggleToolButton(button) {
     button.closest(".button").classList.toggle("active");
 }
 
-/* изменение толщины */
+/* Изменение толщины */
 function changeLineWidth(brushSize) {
     context.lineWidth = brushSize;
 }
@@ -823,12 +823,13 @@ range.oninput = function () {
     rangeNums.style.left = this.value * 5 + "px";
     rangeNums.innerHTML = this.value;
 }
-/* очистка изображения */
+
+/* Очистка холста */
 document.getElementById("clean").onclick = function clear() {
     context.clearRect(0, 0, canvas.width, canvas.height);
 };
 
-/* рисование основным и доп цветом */
+/* Рисование основным и доп цветом */
 var currentColor = '#000000';
 var currentColor2 = '#ffffff';
 
@@ -840,8 +841,7 @@ document.querySelector("input[name=additionalColor]").oninput = function () {
     currentColor2 = this.value;
 }
 
-/* поменять цвета местами и ч/б */
-
+/* Поменять цвета местами и ч/б */
 document.querySelector("button[name=swapColors]").addEventListener("click", swapMainAndAdditionalColors);
 
 function swapMainAndAdditionalColors() {
@@ -860,5 +860,4 @@ function makeBlackAndWhite() {
     currentColor2 = '#ffffff'
     document.querySelector("input[name=mainColor]").value = currentColor;
     document.querySelector("input[name=additionalColor]").value = currentColor2;
-
 }
