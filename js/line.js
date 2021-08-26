@@ -24,6 +24,9 @@ function lineClick() {
         }
         context.stroke();
         context.closePath();
+        
+        //для undo
+        restore_array.push(context.getImageData(0, 0, canvasWidth, canvasHeight));
+        index += 1;
     };
-
 }

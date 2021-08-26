@@ -86,7 +86,7 @@ function menuItemClick(menuItem) {
             break;
         case "resizeCanvas":
             showForm(".canvasResizeForm");
-            break;
+            break; 
     }
 }
 
@@ -378,23 +378,11 @@ function hotkeyPress() {
     if (event.ctrlKey) {
         switch (event.key) {
             case "z":
-                undoLast();
+                undo_last();
                 break;
             case "r":
-               
+                redo_last();   
                 break;
-            case "x":
-                
-                break;
-            case "c":
-                
-                break;
-            case "v":
-                
-                break;
-            case "d":
-                
-                break;   
         }
     }
 }
@@ -801,7 +789,7 @@ function toolButtonClick() {
             /*функционал*/
             break;
         case "selectTool":
-            /*функционал*/
+            selectClick();
             break;
         case "pencilTool":
             pencilClick();
@@ -882,4 +870,20 @@ function makeBlackAndWhite() {
     currentColor2 = '#ffffff'
     document.querySelector("input[name=mainColor]").value = currentColor;
     document.querySelector("input[name=additionalColor]").value = currentColor2;
+}
+
+/* Отменить */
+document.getElementById('redo').addEventListener("change", undo_last);
+
+let restore_array = [];
+let index = -1;
+var restore_state;
+function undo_last() {
+    if (index <= 0) {
+        clearCanvas();
+    } else {
+        index -= 1;
+        restore_state = restore_array.pop();
+        context.putImageData(restore_array[index], 0, 0);
+    }
 }

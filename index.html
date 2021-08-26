@@ -44,6 +44,13 @@
         <div class='menu'>
             <div class='menuTitle'>Правка</div>
             <div class='menuList'>
+               <div class='menuItem' id='undo'>Отменить
+                    <span class='hotkey'>Ctrl+Z</span>
+                </div>
+                <div class='menuItem' id='redo' >Вернуть
+                    <span class='hotkey'>Ctrl+R</span>
+                </div>
+                <!-- пока не знаю, будем ли-->
                 <div class='menuItem' id='cut'>Вырезать
                     <span class='hotkey'>Ctrl+X</span>
                 </div>
@@ -201,6 +208,7 @@
     </div>
 
     <div class='overlay' hidden></div>
+    <div id="rectSelection" hidden></div>
 
     <!-- Форма для изменения размера изображения -->
     <div class='form imageResizeForm'>
