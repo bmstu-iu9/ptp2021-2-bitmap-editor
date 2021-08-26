@@ -44,12 +44,18 @@
         <div class='menu'>
             <div class='menuTitle'>Правка</div>
             <div class='menuList'>
-                <div class='menuItem' id='undo'>Отменить</div>
-                <div class='menuItem' id='redo'>Вернуть</div>
-                <div class='menuItem' id='cut'>Вырезать</div>
-                <div class='menuItem' id='copy'>Скопировать</div>
-                <div class='menuItem' id='paste'>Вставить</div>
-                <div class='menuItem' id='delete'>Удалить</div>
+                <div class='menuItem' id='cut'>Вырезать
+                    <span class='hotkey'>Ctrl+X</span>
+                </div>
+                <div class='menuItem' id='copy'>Скопировать
+                    <span class='hotkey'>Ctrl+C</span>
+                </div>
+                <div class='menuItem' id='paste'>Вставить
+                    <span class='hotkey'>Ctrl+V</span>
+                </div>
+                <div class='menuItem' id='delete'>Удалить
+                    <span class='hotkey'>Ctrl+D</span>
+                </div>
             </div>
         </div>
         <div class='menu'>
@@ -79,9 +85,6 @@
     <div class='toolPanel'>
         <div class="iconAngle">
             <img src="icons/left-panel-tools/magic-wand.png" width="36" height="36">
-        </div>
-        <div class='button'>
-            <button type='button' name='moveTool' title='Выделить и переместить' class='toolButton' style='background-image: url(icons/left-panel-tools/move.svg)'></button>
         </div>
         <div class='button'>
             <button type='button' name='handTool' title='Рука' class='toolButton' style='background-image: url(icons/left-panel-tools/hand.svg)'></button>
@@ -130,7 +133,7 @@
 
             </div>
             <div class='savedColors'>
-                <!-- -->
+                <!--не нужен, если реализована пипетка -->
             </div>
         </div>
 
@@ -150,7 +153,7 @@
                 <div class="rangeNum"></div>
                 <input type="range" name="brushsize" min="0" max="30" id="brushSlider" step="1" value="0" class='slider' onchange="changeLineWidth(this.value);">
             </div>
-            <!--следующие под вопросом-->
+            <!--следующие под вопросом; уберите комментарий, как сделаете-->
             <h6 align="center">Тип фигуры</h6>
             <h6 align="center">Стиль заливки</h6>
         </div>
