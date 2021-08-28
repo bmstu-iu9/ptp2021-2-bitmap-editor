@@ -18,13 +18,16 @@ function eraserClick() {
                 context.lineTo(x - xdif, y - ydif);
                 context.stroke();
                 context.closePath();
+                //для undo
+                restore_array.push(context.getImageData(0, 0, canvasWidth, canvasHeight));
+                index += 1;
             }
         }
         context.globalCompositeOperation = "source-over"; // возвращаем по-умолчанию
-    }
-    
-    canvas.onmouseup = function() {
+    };
+
+    canvas.onmouseup = function () {
         canvas.onmousemove = null;
-    }
-    
+    };
+
 }

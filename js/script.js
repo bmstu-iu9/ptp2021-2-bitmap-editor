@@ -87,6 +87,12 @@ function menuItemClick(menuItem) {
         case "resizeCanvas":
             showForm(".canvasResizeForm");
             break;
+        case "undo":
+            undo_last();
+            break;
+        /*case "redo":
+            redo_last(); 
+            break;*/
     }
 }
 
@@ -378,23 +384,11 @@ function hotkeyPress() {
     if (event.ctrlKey) {
         switch (event.key) {
             case "z":
-                undoLast();
+                undo_last();
                 break;
-            case "r":
-               
-                break;
-            case "x":
-                
-                break;
-            case "c":
-                
-                break;
-            case "v":
-                
-                break;
-            case "d":
-                
-                break;   
+           /* case "r":
+                redo_last();   
+                break;*/
         }
     }
 }
@@ -794,13 +788,7 @@ function toolButtonClick() {
     canvas.onmouseup = function () {}
 
     switch (button.name) {
-        case "moveTool":
-            /*функционал*/
-            break;
         case "handTool":
-            /*функционал*/
-            break;
-        case "selectTool":
             /*функционал*/
             break;
         case "pencilTool":
@@ -882,4 +870,20 @@ function makeBlackAndWhite() {
     currentColor2 = '#ffffff'
     document.querySelector("input[name=mainColor]").value = currentColor;
     document.querySelector("input[name=additionalColor]").value = currentColor2;
+}
+
+/* Отменить */
+document.getElementById('undo').addEventListener("change", undo_last);
+
+let restore_array = [];
+let index = -1;
+var restore_state;
+function undo_last() {
+    if (index <= 0) {
+        clearCanvas();
+    } else {
+        index -= 1;
+        restore_state = restore_array.pop();
+        context.putImageData(restore_array[index], 0, 0);
+    }
 }
