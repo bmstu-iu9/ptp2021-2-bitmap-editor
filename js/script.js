@@ -782,6 +782,9 @@ function toolButtonClick() {
     if (button.closest(".button") == firstToolBtn) {
         addWorkspaceCorner();
     }
+
+    button = button.querySelector("button") || button; // не удаляйте эту строку больше, пожалуйста
+
     /* Обнуление */
     canvas.onmousemove = function () {}
     canvas.onmousedown = function () {}
