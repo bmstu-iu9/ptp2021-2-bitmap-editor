@@ -783,7 +783,7 @@ function toolButtonClick() {
         addWorkspaceCorner();
     }
 
-    button = button.firstChild || button; // не удаляйте эту строку больше, пожалуйста
+    button = button.querySelector("button") || button; // не удаляйте эту строку больше, пожалуйста
 
     /* Обнуление */
     canvas.onmousemove = function () {}
