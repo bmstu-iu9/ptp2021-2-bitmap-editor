@@ -86,7 +86,13 @@ function menuItemClick(menuItem) {
             break;
         case "resizeCanvas":
             showForm(".canvasResizeForm");
-            break; 
+            break;
+        case "undo":
+            undo_last();
+            break;
+        /*case "redo":
+            redo_last(); 
+            break;*/
     }
 }
 
@@ -380,9 +386,9 @@ function hotkeyPress() {
             case "z":
                 undo_last();
                 break;
-            case "r":
+           /* case "r":
                 redo_last();   
-                break;
+                break;*/
         }
     }
 }
@@ -770,7 +776,7 @@ function toolPanelClick() {
 }
 
 function toolButtonClick() {
-    let button = event.target.closest(".toolButton");
+    let button = event.target;
     toggleToolButton(button);
 
     if (button.closest(".button") == firstToolBtn) {
@@ -787,9 +793,6 @@ function toolButtonClick() {
             break;
         case "handTool":
             /*функционал*/
-            break;
-        case "selectTool":
-            selectClick();
             break;
         case "pencilTool":
             pencilClick();
@@ -873,7 +876,7 @@ function makeBlackAndWhite() {
 }
 
 /* Отменить */
-document.getElementById('redo').addEventListener("change", undo_last);
+document.getElementById('undo').addEventListener("change", undo_last);
 
 let restore_array = [];
 let index = -1;

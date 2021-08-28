@@ -29,9 +29,9 @@ function pencilClick() {
                 index += 1;
             }
         }
-    }
+    };
 
     canvas.onmouseup = function () {
         canvas.onmousemove = null;
-    }
+    };
 }

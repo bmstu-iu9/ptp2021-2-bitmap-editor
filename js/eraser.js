@@ -24,10 +24,10 @@ function eraserClick() {
             }
         }
         context.globalCompositeOperation = "source-over"; // возвращаем по-умолчанию
-    }
+    };
 
     canvas.onmouseup = function () {
         canvas.onmousemove = null;
-    }
+    };
 
 }

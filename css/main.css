@@ -659,11 +659,3 @@ body {
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-
-#rectSelection {
-    position: absolute;
-    border: 2px dashed #a9a9a9;
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
-}
