@@ -788,9 +788,6 @@ function toolButtonClick() {
     canvas.onmouseup = function () {}
 
     switch (button.name) {
-        case "moveTool":
-            /*функционал*/
-            break;
         case "handTool":
             /*функционал*/
             break;
