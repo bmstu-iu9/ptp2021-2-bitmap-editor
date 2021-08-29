@@ -44,7 +44,7 @@
         <div class='menu'>
             <div class='menuTitle'>Правка</div>
             <div class='menuList'>
-               <div class='menuItem' id='undo'>Отменить
+                <div class='menuItem' id='undo'>Отменить
                     <span class='hotkey'>Ctrl+Z</span>
                 </div>
                 <!--<div class='menuItem' id='redo' >Вернуть
@@ -78,7 +78,7 @@
     <!-- Панель инструментов (слева) -->
     <div class='toolPanel'>
         <div class="iconAngle">
-            <img src="icons/left-panel-tools/magic-wand.png" width="36" height="36">
+            <img src="icons/left-panel-tools/magic-wand.png" width="36" height="36" alt="Лого">
         </div>
         <div class='button'>
             <button type='button' name='handTool' title='Рука' class='toolButton' style='background-image: url(icons/left-panel-tools/hand.svg)'></button>
@@ -139,14 +139,27 @@
 
         <!-- Свойства инструмента -->
         <div class='section preferences'>Свойства инструмента
-            <h5 align="center">Толщина</h5>
+            <div class = 'thicknessText'>
+                <h5>Толщина</h5>
+            </div>
             <div class='thickness'>
                 <div class="rangeNum"></div>
                 <input type="range" name="brushsize" min="0" max="30" id="brushSlider" step="1" value="0" class='slider' onchange="changeLineWidth(this.value);">
             </div>
+            <div class = 'opacityText'>
+                <h5>Прозрачность</h5>
+            </div>
+            <div class='opacity'>
+                <div class="opacityNum"></div>
+                <input type="range" name="opacityPercent" min="0.0" max="1.0" id="opacitySlider" step="0.1" value="0.0" class='slider' onchange="changeOpacity(this.value); ">
+            </div>
             <!--следующие под вопросом; уберите комментарий, как сделаете-->
-            <h6 align="center">Тип фигуры</h6>
-            <h6 align="center">Стиль заливки</h6>
+            <div class='typeText'>
+                <h6>Тип фигуры</h6>
+            </div>
+            <div class='styleText'>
+                <h6>Стиль заливки</h6>
+            </div>
         </div>
 
     </div>
@@ -154,7 +167,7 @@
     <!-- Панель снизу -->
     <div class='bottomPanel'>
         <div class='bottomMenu'>
-            <button type='button' id='clean' class="clear">Очистить холст</button>
+            <button type='button' id='clean' class="clear ">Очистить холст</button>
         </div>
         <div class='bottomMenu'>
             <div class='zoom'>
@@ -182,7 +195,7 @@
             <div class='input'>
                 <label><input type='checkbox' name='canvasIsTransparent' value='true' onclick='formCheckboxClick()'>Прозрачный</label>
             </div>
-            <div class='button' style="float:left">
+            <div class='button' style="float:left ">
                 <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
@@ -209,7 +222,7 @@
                 <label><input type='checkbox' name='percent' value='true' onclick='formCheckboxClick()'>Процент</label>
                 <input type='number' name='height' min='0' value='100' max='2000' placeholder='0' disabled>
             </div>
-            <div class='button' style="float:left">
+            <div class='button' style="float:left ">
                 <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>
@@ -234,7 +247,7 @@
                 <label><input type='checkbox' name='percent' value='true' onclick='formCheckboxClick()'>Процент</label>
                 <input type='number' name='height' min='0' value='100' max='2000' placeholder='0' disabled>
             </div>
-            <div class='button' style="float:left">
+            <div class='button' style="float:left ">
                 <button type='button' name='cancel'>Отмена</button>
             </div>
             <div class='buttonOk'>

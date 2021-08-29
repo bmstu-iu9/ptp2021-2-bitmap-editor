@@ -33,12 +33,12 @@ window.addEventListener("load", () => {
     firstToolBtn.classList.add("active");
     firstToolBtn.onmouseover = addWorkspaceCorner;
     firstMenuBtn.onmouseover = addWorkspaceCorner;
-    firstToolBtn.onmouseout = function () {
+    firstToolBtn.onmouseout = function() {
         if (!firstToolBtn.classList.contains("active")) {
             removeWorkspaceCorner();
         }
     }
-    firstMenuBtn.onmouseout = function () {
+    firstMenuBtn.onmouseout = function() {
         if (!firstToolBtn.classList.contains("active")) {
             removeWorkspaceCorner();
         }
@@ -90,9 +90,9 @@ function menuItemClick(menuItem) {
         case "undo":
             undo_last();
             break;
-        /*case "redo":
-            redo_last(); 
-            break;*/
+            /*case "redo":
+                redo_last(); 
+                break;*/
     }
 }
 
@@ -288,13 +288,13 @@ function openImage(file) {
     clearCanvas();
     let reader = new FileReader();
     let image = new Image();
-    image.onload = function () {
+    image.onload = function() {
         setCanvasValues(image.width, image.height, "transparent");
         context.drawImage(image, 0, 0);
         resizeCanvasArea();
         centerCanvas();
     }
-    reader.onload = function () {
+    reader.onload = function() {
         image.src = reader.result;
     }
     reader.readAsDataURL(file);
@@ -386,9 +386,9 @@ function hotkeyPress() {
             case "z":
                 undo_last();
                 break;
-           /* case "r":
-                redo_last();   
-                break;*/
+                /* case "r":
+                     redo_last();   
+                     break;*/
         }
     }
 }
@@ -409,10 +409,10 @@ document.querySelector("#insertImage").addEventListener("change", () => {
 function openImageToInsert(file) {
     let reader = new FileReader();
     let image = new Image();
-    image.onload = function () {
+    image.onload = function() {
         initImageSelection(image);
     }
-    reader.onload = function () {
+    reader.onload = function() {
         image.src = reader.result;
     }
     reader.readAsDataURL(file);
@@ -786,9 +786,9 @@ function toolButtonClick() {
     button = button.querySelector("button") || button; // не удаляйте эту строку больше, пожалуйста
 
     /* Обнуление */
-    canvas.onmousemove = function () {}
-    canvas.onmousedown = function () {}
-    canvas.onmouseup = function () {}
+    canvas.onmousemove = function() {}
+    canvas.onmousedown = function() {}
+    canvas.onmouseup = function() {}
 
     switch (button.name) {
         case "handTool":
@@ -830,9 +830,14 @@ function changeLineWidth(brushSize) {
     context.lineWidth = brushSize;
 }
 
+// Изменение прозрачности
+function changeOpacity(opacityPercent) {
+    context.globalAlpha = 1.0 - opacityPercent;
+}
+
 let range = document.querySelector(".slider");
 let rangeNums = document.querySelector(".rangeNum");
-range.oninput = function () {
+range.oninput = function() {
     rangeNums.style.left = this.value * 5 + "px";
     rangeNums.innerHTML = this.value;
 }
@@ -846,11 +851,11 @@ document.getElementById("clean").onclick = function clear() {
 var currentColor = '#000000';
 var currentColor2 = '#ffffff';
 
-document.querySelector("input[name=mainColor]").oninput = function () {
+document.querySelector("input[name=mainColor]").oninput = function() {
     currentColor = this.value;
 }
 
-document.querySelector("input[name=additionalColor]").oninput = function () {
+document.querySelector("input[name=additionalColor]").oninput = function() {
     currentColor2 = this.value;
 }
 
@@ -881,6 +886,7 @@ document.getElementById('undo').addEventListener("change", undo_last);
 let restore_array = [];
 let index = -1;
 var restore_state;
+
 function undo_last() {
     if (index <= 0) {
         clearCanvas();

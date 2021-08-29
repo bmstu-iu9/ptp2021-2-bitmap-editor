@@ -1,5 +1,6 @@
 function brushClick() {
     context.lineCap = "round";
+    var currentOpacity = context.globalAlpha;
     var pointer, points;
     points = new Array(10);
     canvas.onmousedown = function(event) {
@@ -48,7 +49,7 @@ function brushClick() {
     };
 
     canvas.onmouseup = function() {
-        context.globalAlpha = 1.0;
+        context.globalAlpha = currentOpacity;
         points = new Array(10);
         canvas.onmousemove = null;
     };
