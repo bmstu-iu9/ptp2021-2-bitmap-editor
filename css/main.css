@@ -101,7 +101,7 @@ body {
 }
 
 .form button {
-    padding: 10px, 20px;
+    padding: 10px 20px;
     width: 90px;
     height: 34px;
     margin-left: 5px;
@@ -408,6 +408,22 @@ body {
     flex-wrap: nowrap;
     justify-content: space-between;
     position: relative;
+}
+
+.thicknessText {
+    text-align: center;
+}
+
+.opacityText {
+    text-align: center;
+}
+
+.typeText {
+    text-align: center;
+}
+
+.styleText {
+    text-align: center;
 }
 
 .thickness>input[type="range"] {
