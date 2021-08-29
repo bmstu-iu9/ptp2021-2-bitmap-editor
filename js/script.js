@@ -798,7 +798,7 @@ function toolButtonClick() {
             pencilClick();
             break;
         case "brushTool":
-            /*функционал*/
+            brushClick();
             break;
         case "eraserTool":
             eraserClick();
