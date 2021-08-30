@@ -361,6 +361,8 @@ function saveImage() {
 
 document.addEventListener("keydown", hotkeyPress);
 
+var brushType = 1; //обозначение типа кисти цифрой
+
 function hotkeyPress() {
     if (event.altKey) {
         switch (event.key) {
@@ -379,6 +381,23 @@ function hotkeyPress() {
             case "y":
                 showForm(".canvasResizeForm");
                 break;
+            //костыль для простой смены кистей
+            case "1":
+                setBrushType(1);
+                document.getElementById('bruhsh').style = 'background-image: url(icons/left-panel-tools/brush.svg)'
+                break;
+            case "2":
+                setBrushType(2);
+                document.getElementById('bruhsh').style = 'background-image: url(icons/left-panel-tools/brush2.svg)'
+                break;
+            case "3":
+                setBrushType(3);
+                document.getElementById('bruhsh').style = 'background-image: url(icons/left-panel-tools/brush3.svg)'
+                break;
+            case "4":
+                setBrushType(4);
+                document.getElementById('bruhsh').style = 'background-image: url(icons/left-panel-tools/brush4.png)'
+                break;
         }
     }
     if (event.ctrlKey) {
@@ -386,11 +405,15 @@ function hotkeyPress() {
             case "z":
                 undo_last();
                 break;
-                /* case "r":
-                     redo_last();   
-                     break;*/
+            /* case "r":
+                redo_last();   
+                break;*/
         }
     }
+}
+
+function setBrushType(numType) {
+    brushType = numType;
 }
 
 /* Поместить изображение на холст */
