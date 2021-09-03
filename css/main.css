@@ -426,12 +426,12 @@ body {
     text-align: center;
 }
 
-.thickness>input[type="range"] {
+.thickness > input[type="range"] {
     position: absolute;
     bottom: 0;
 }
 
-.thickness>.rangeNum {
+.thickness > .rangeNum {
     width: 20px;
     height: 20px;
     position: absolute;
@@ -469,6 +469,57 @@ body {
     background-color: #FFCA28;
 }
 
+.opacity {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    position: relative;
+}
+
+.opacity > input[type="range"] {
+    position: absolute;
+    bottom: 0;
+}
+
+.opacity > .opacityNum {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    left: 5px;
+    top: 0;
+}
+
+.sliderOp {
+    -webkit-appearance: none;
+    width: 90%;
+    height: 15px;
+    border-radius: 20px;
+    background: #d3d3d3;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.sliderOp:hover {
+    opacity: 1;
+}
+
+.sliderOp::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #FFB300;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+.sliderOp::-webkit-slider-thumb:hover {
+    background-color: #FFCA28;
+}
 
 /* Панель снизу */
 
@@ -504,7 +555,6 @@ body {
 .clear:hover {
     background: #F5F5F5;
 }
-
 
 /* Скроллбар */
 
