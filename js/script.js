@@ -835,12 +835,6 @@ function toolButtonClick() {
         case "bucketTool":
             /*функционал*/
             break;
-        case "textTool":
-            /*функционал*/
-            break;
-        case "pipetteTool":
-            /*функционал*/
-            break;
     }
 }
 
