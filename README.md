@@ -1,5 +1,5 @@
 # Растровый графический редактор WizArt
-+ [logo.png](icons/logo.png)
+[logo.png](icons/logo.png)
 
 ## Функции редактора
 - #### Карандаш
