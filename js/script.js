@@ -14,6 +14,7 @@ let backgroundColor = "transparent";
 let workspace = document.querySelector(".workspace");
 let canvasArea = document.querySelector(".canvasArea");
 let canvasClass = document.querySelector(".canvas");
+let alertShown = false;
 
 window.addEventListener("load", () => {
     resizeCanvasArea();
@@ -821,6 +822,7 @@ function toolButtonClick() {
             pencilClick();
             break;
         case "brushTool":
+            alertChanger();
             brushClick();
             break;
         case "eraserTool":
