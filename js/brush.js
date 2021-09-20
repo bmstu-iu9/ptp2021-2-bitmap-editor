@@ -1,3 +1,10 @@
+function alertChanger() {
+    if (!alertShown) {
+      alert("Alt+1 - Кисть для скетчей\nAlt+2 - Кисть - маркер\nAlt+3 - Кисть - распылитель\nAlt+4 - Цветная пиксельная кисть");
+      alertShown = true;
+  }
+}
+
 function brushClick() {
   context.lineCap = "round";
   var currentOpacity = context.globalAlpha;
