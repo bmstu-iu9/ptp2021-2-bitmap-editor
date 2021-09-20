@@ -2,7 +2,7 @@ function pencilClick() {
     context.lineCap = "round";
 
     canvas.onmousedown = function (event) {
-
+        dotDraw(event);
         canvas.onmousemove = function drawing(event) {
             // в "event"  попадает экземпляр MouseEvent
             var x = event.offsetX;
@@ -34,4 +34,8 @@ function pencilClick() {
     canvas.onmouseup = function () {
         canvas.onmousemove = null;
     };
+}
+
+function dotDraw(event) {
+    context.fillRect(event.offsetX,event.offsetY,1,1);
 }
