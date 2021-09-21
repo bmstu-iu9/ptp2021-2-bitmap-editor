@@ -91,9 +91,6 @@ function menuItemClick(menuItem) {
         case "undo":
             undo_last();
             break;
-            /*case "redo":
-                redo_last(); 
-                break;*/
     }
 }
 
@@ -382,7 +379,6 @@ function hotkeyPress() {
             case "y":
                 showForm(".canvasResizeForm");
                 break;
-                //костыль для простой смены кистей
             case "1":
                 setBrushType(1);
                 document.getElementById('bruhsh').style = 'background-image: url(icons/left-panel-tools/brush.svg)'
@@ -399,16 +395,6 @@ function hotkeyPress() {
                 setBrushType(4);
                 document.getElementById('bruhsh').style = 'background-image: url(icons/left-panel-tools/brush4.png)'
                 break;
-        }
-    }
-    if (event.ctrlKey) {
-        switch (event.key) {
-            case "z":
-                undo_last();
-                break;
-                /* case "r":
-                    redo_last();   
-                    break;*/
         }
     }
 }

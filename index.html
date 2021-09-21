@@ -12,7 +12,7 @@
 <body>
     <div class='workspace topLeftCorner'>
         <div class='canvasArea'>
-            <canvas class='canvas' id='canvas' width='500' height='500'>Холст</canvas>
+            <canvas class='canvas' id='canvas' width='1000' height='500'>Холст</canvas>
         </div>
     </div>
 
@@ -44,12 +44,7 @@
         <div class='menu'>
             <div class='menuTitle'>Правка</div>
             <div class='menuList'>
-                <div class='menuItem' id='undo'>Отменить
-                    <span class='hotkey'>Ctrl+Z</span>
-                </div>
-                <!--<div class='menuItem' id='redo' >Вернуть
-                    <span class='hotkey'>Ctrl+R</span>
-                </div>-->
+                <div class='menuItem' id='undo'>Отменить</div>
             </div>
         </div>
         <div class='menu'>
@@ -103,9 +98,6 @@
                 </div>
 
             </div>
-            <div class='savedColors'>
-                <!--не нужен, если реализована пипетка -->
-            </div>
         </div>
 
         <div class='insertImageButtons' hidden>
@@ -133,9 +125,8 @@
                 <div class="opacityNum"></div>
                 <input type="range" name="opacityPercent" min="0.0" max="1.0" id="opacitySlider" step="0.1" value="0.0" class='sliderOp' onchange="changeOpacity(this.value); ">
             </div>
-            <!--следующие под вопросом; уберите комментарий, как сделаете-->
             <div class='typeText'>
-                <h6>Тип фигуры</h6>
+                <h5>Тип фигуры</h5>
             </div>
         </div>
 
