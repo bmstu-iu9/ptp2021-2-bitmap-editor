@@ -77,13 +77,13 @@
             <button type='button' name='eraserTool' title='Ластик' class='toolButton' style='background-image: url(icons/left-panel-tools/eraser.svg)'></button>
         </div>
         <div class='button'>
-            <button type='button' name='figuresTool' title='Квадрат' class='toolButton' style='background-image: url(icons/left-panel-tools/square.png)'></button>
+            <button type='button' name='square' title='Квадрат' class='toolButton' style='background-image: url(icons/left-panel-tools/square.png)'></button>
         </div>
         <div class='button'>
-            <button type='button' name='figuresTool' title='Круг' class='toolButton' style='background-image: url(icons/left-panel-tools/circle.png)'></button>
+            <button type='button' name='circle' title='Круг' class='toolButton' style='background-image: url(icons/left-panel-tools/circle.png)'></button>
         </div>
         <div class='button'>
-            <button type='button' name='figuresTool' title='Треугольник' class='toolButton' style='background-image: url(icons/left-panel-tools/triangle.png)'></button>
+            <button type='button' name='triangle' title='Треугольник' class='toolButton' style='background-image: url(icons/left-panel-tools/triangle.png)'></button>
         </div>
         <div class='button'>
             <button type='button' name='lineTool' title='Линия' class='toolButton' style='background-image: url(icons/left-panel-tools/line.svg)'></button>
@@ -116,24 +116,23 @@
         </div>
 
         <!-- Свойства инструмента -->
-        <div class='section preferences'>Свойства инструмента
-            <div class = 'thicknessText'>
+        <div class='section preferences'>
+            Свойства инструмента
+            <div class='thicknessText'>
                 <h5>Толщина</h5>
             </div>
             <div class='thickness'>
                 <div class="rangeNum"></div>
                 <input type="range" name="brushsize" min="0" max="30" id="brushSlider" step="1" value="0" class='slider' onchange="changeLineWidth(this.value);">
             </div>
-            <div class = 'opacityText'>
+            <div class='opacityText'>
                 <h5>Прозрачность</h5>
             </div>
             <div class='opacity'>
                 <div class="opacityNum"></div>
                 <input type="range" name="opacityPercent" min="0.0" max="1.0" id="opacitySlider" step="0.1" value="0.0" class='sliderOp' onchange="changeOpacity(this.value); ">
             </div>
-            <div class='typeText'>
-                <h5>Тип фигуры</h5>
-            </div>
+            
         </div>
 
     </div>
@@ -230,6 +229,9 @@
     <script src='js/line.js'></script>
     <script src='js/eraser.js'></script>
     <script src='js/brush.js'></script>
+    <script src='js/square.js'></script>
+    <script src='js/circle.js'></script>
+    <script src='js/triangle.js'></script>
 </body>
 
 </html>

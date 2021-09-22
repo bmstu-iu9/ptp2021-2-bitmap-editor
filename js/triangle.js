@@ -1,4 +1,4 @@
-function squareClick() {
+function triangleClick() {
     context.lineCap = "round";
 
     var starter_x;
@@ -12,7 +12,10 @@ function squareClick() {
             context.putImageData(buf, 0, 0)
             buf = context.getImageData(0, 0, canvasWidth, canvasHeight)
             context.beginPath();
-       
+            context.moveTo(starter_x, starter_y);
+            context.lineTo(event.offsetX, event.offsetY);
+            context.lineTo(starter_x + (starter_x - event.offsetX), event.offsetY);
+            context.lineTo(starter_x, starter_y);
             if (event.which == 1) {
                 context.strokeStyle = currentColor;
                 context.fillStyle = currentColor;
@@ -21,7 +24,7 @@ function squareClick() {
                 context.strokeStyle = currentColor2;
                 context.fillStyle = currentColor2;
             }
-            context.strokeRect(starter_x, starter_y, event.offsetX - starter_x, event.offsetY - starter_y);
+            context.stroke();
             context.closePath();
             //для undo
             restore_array.push(context.getImageData(0, 0, canvasWidth, canvasHeight));

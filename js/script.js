@@ -814,11 +814,11 @@ function toolButtonClick() {
         case "square":
             squareClick();
             break;
+        case "circle":
+            circleClick();
+            break;
         case "triangle":
             triangleClick();
-            break;
-        case "square":
-            squareClick();
             break;
         case "lineTool":
             lineClick();
