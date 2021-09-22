@@ -811,8 +811,14 @@ function toolButtonClick() {
         case "eraserTool":
             eraserClick();
             break;
-        case "figuresTool":
-            /*функционал*/
+        case "square":
+            squareClick();
+            break;
+        case "circle":
+            circleClick();
+            break;
+        case "triangle":
+            triangleClick();
             break;
         case "lineTool":
             lineClick();
